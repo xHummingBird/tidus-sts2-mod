@@ -1,0 +1,13 @@
+{
+  "TIDUS-BROTHERHOOD.description": "Gain 5 [gold]Overdrive[/gold] at the start of every turn. [gold]Overkill[/gold] enemies to gain better rewards.",
+  "TIDUS-BROTHERHOOD.flavor": "",
+  "TIDUS-BROTHERHOOD.title": "Brotherhood",
+
+  "TIDUS-CALADBOLG.description": "Gain 3 additional [gold]Overdrive[/gold] from playing [gold]Blitz[/gold] and from Attacks. Upgrade your [gold]Overdrive[/gold].",
+  "TIDUS-CALADBOLG.flavor": "",
+  "TIDUS-CALADBOLG.title": "Caladbolg",
+
+  "TIDUS-TAMING_SWORD.description": "Reduce [gold]Overkill[/gold] threshold to 12%.",
+  "TIDUS-TAMING_SWORD.flavor": "",
+  "TIDUS-TAMING_SWORD.title": "Taming Sword"
+}

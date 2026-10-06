@@ -1,0 +1,16 @@
+{
+  "TIDUS-TIDUS.aromaPrinciple": "A cheerful blitzball star swept away from a dream of Zanarkand. Armed with speed, agility, and an unbreakable spirit, Tidus fights to protect his friends and forge his own future.",
+  "TIDUS-TIDUS.banter.alive.endTurnPing": "Hey, c'mon! Let's keep moving!",
+  "TIDUS-TIDUS.banter.dead.endTurnPing": "...You're gonna have to finish this one.",
+  "TIDUS-TIDUS.cardsModifierDescription": "Tidus cards will now appear in rewards and shops.",
+  "TIDUS-TIDUS.cardsModifierTitle": "Tidus Cards",
+  "TIDUS-TIDUS.description": "A swordsman who builds Overdrive and unleashes powerful [blue]Blitz[/blue] techniques. Gain [gold]Haste[/gold] and inflict [gold]Delay[/gold] to outpace your foes.",
+  "TIDUS-TIDUS.eventDeathPrevention": "I'm not done yet!",
+  "TIDUS-TIDUS.goldMonologue": "Whoa! That's a lot of gil!",
+  "TIDUS-TIDUS.possessiveAdjective": "his",
+  "TIDUS-TIDUS.pronounObject": "him",
+  "TIDUS-TIDUS.pronounPossessive": "his",
+  "TIDUS-TIDUS.pronounSubject": "he",
+  "TIDUS-TIDUS.title": "Guardian Tidus",
+  "TIDUS-TIDUS.titleObject": "the Guardian Tidus"
+}

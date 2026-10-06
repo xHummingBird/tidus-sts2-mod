@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://muvc7h1gr6uh"
+path="res://.godot/imported/phrase (7).wav-7fe7a23ad1f8034d95940dba49cb271d.sample"
+
+[deps]
+
+source_file="res://Tidus/sounds/phrase (7).wav"
+dest_files=["res://.godot/imported/phrase (7).wav-7fe7a23ad1f8034d95940dba49cb271d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

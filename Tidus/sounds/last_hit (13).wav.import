@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b617l1e3bsbdc"
+path="res://.godot/imported/last_hit (13).wav-55e9e71e0efaff29dd1a784a7b45ff42.sample"
+
+[deps]
+
+source_file="res://Tidus/sounds/last_hit (13).wav"
+dest_files=["res://.godot/imported/last_hit (13).wav-55e9e71e0efaff29dd1a784a7b45ff42.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

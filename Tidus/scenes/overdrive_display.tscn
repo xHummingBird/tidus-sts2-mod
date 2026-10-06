@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1vhksy5ei00b"]
+
+[ext_resource type="Texture2D" uid="uid://bc50t67k5fah1" path="res://Tidus/images/charui/overdrive_empty.png" id="1_5254f"]
+
+[node name="OverdriveDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -157.0
+offset_right = 116.0
+offset_bottom = -85.0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+mouse_filter = 1
+
+[node name="Overlay" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5254f")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.133
+anchor_top = 0.047000002
+anchor_right = 0.869
+anchor_bottom = 0.84700006
+offset_left = 0.04166794
+offset_top = -0.033343792
+offset_right = 0.041671753
+offset_bottom = -0.033348083
+bbcode_enabled = true

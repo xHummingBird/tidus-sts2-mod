@@ -1,0 +1,7 @@
+{
+  "TIDUS_OVERDRIVE.title": "Overdrive",
+  "TIDUS_OVERDRIVE.description": "At 100 Overdrive, unleash an Overdrive attack. \n\nGain 5 Overdrive at the start of your turn.\nGain 3 Overdrive whenever you play an Attack.\nGain 6 Overdrive whenever you trigger a [blue]Blitz[/blue] effect from discard.",
+
+  "TIDUS_OVERKILL.title": "Overkill",
+  "TIDUS_OVERKILL.description": "When a killing blow deals damage equal to or greater than 20% of the target's Max HP, gain 10 additional Gold and 1 additional card reward option at the end of combat. If the target was an Act Boss, gain an additional Relic. Only works on non-minion creatures."
+}

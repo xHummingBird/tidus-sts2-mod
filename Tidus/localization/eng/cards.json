@@ -1,0 +1,13 @@
+{
+  "TIDUS-STRIKE_TIDUS.description": "Deal {Damage:diff()} damage.",
+  "TIDUS-STRIKE_TIDUS.title": "Strike",
+
+  "TIDUS-DART_AND_WEAVE.description": "Deal {Damage:diff()} damage. \n{BlitzIcon}: Gain {Block:diff()} [gold]Block[/gold].",
+  "TIDUS-DART_AND_WEAVE.title": "Dart & Weave",
+  
+  "TIDUS-DEFEND_TIDUS.description": "Gain {Block:diff()} [gold]Block[/gold].",
+  "TIDUS-DEFEND_TIDUS.title": "Defend",
+
+  "TIDUS-GUARD.description": "Gain {Block:diff()} [gold]Block[/gold]. \nDiscard 1 card.",
+  "TIDUS-GUARD.title": "Guard"
+}

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dfhr4c4ybn7cq"
+path="res://.godot/imported/attack_hard (6).wav-b9c5dfd399e25560d4259be1122abba8.sample"
+
+[deps]
+
+source_file="res://Tidus/sounds/attack_hard (6).wav"
+dest_files=["res://.godot/imported/attack_hard (6).wav-b9c5dfd399e25560d4259be1122abba8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

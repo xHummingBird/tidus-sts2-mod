@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dso2xw1pfahp5"
+path="res://.godot/imported/attack (5).wav-25c5ee5c5627de17b4e1259c847a5530.sample"
+
+[deps]
+
+source_file="res://Tidus/sounds/attack (5).wav"
+dest_files=["res://.godot/imported/attack (5).wav-25c5ee5c5627de17b4e1259c847a5530.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
