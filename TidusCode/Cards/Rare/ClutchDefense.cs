@@ -1,0 +1,36 @@
+using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
+using Tidus.TidusCode.Extensions;
+using Tidus.TidusCode.Mechanics;
+
+namespace Tidus.TidusCode.Cards.Rare;
+
+public class ClutchDefense() : TidusCard(
+    1,
+    CardType.Power,
+    CardRarity.Rare,
+    TargetType.Self)
+{
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new PowerVar<ClutchDefensePower>(4)
+    ];
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
+    {
+        await PowerCmd.Apply<ClutchDefensePower>(
+            choiceContext,
+            Owner.Creature,
+            DynamicVars["ClutchDefensePower"].BaseValue,
+            Owner.Creature,
+            this);
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars["ClutchDefensePower"].UpgradeValueBy(2m);
+    }
+}

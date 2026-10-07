@@ -1,9 +1,9 @@
 {
-  "TIDUS-HASTE_POWER.description": "Double Overdrive gain per turn and from Attacks. Playing or discarding cards with [blue]Blitz[/gold] will now apply both effects.",
-  "TIDUS-HASTE_POWER.smartDescription": "Double Overdrive gain per turn and from Attacks for {Amount} turns.",
+  "TIDUS-HASTE_POWER.description": "Double [red]Overdrive[/red] gain per turn and from Attacks. Playing or discarding cards with [blue]Blitz[/blue] will now apply both effects.",
+  "TIDUS-HASTE_POWER.smartDescription": "Double [red]Overdrive[/red] gain per turn and from Attacks for {Amount} turns. Playing or discarding cards with [blue]Blitz[/blue] will now apply both effects.",
   "TIDUS-HASTE_POWER.title": "Haste",
 
-  "TIDUS-OVERDRIVE_READY_POWER.description": "You can now use [red]Overdrive[/gold].",
-  "TIDUS-OVERDRIVE_READY_POWER.smartDescription": "You can now use [red]Overdrive[/gold].",
-  "TIDUS-OVERDRIVE_READY_POWER.title": "Overdrive Ready"
+  "TIDUS-OVERDRIVE_READY_POWER.description": "Perform [red]Overdrive[/red] when you reach 100 [red]Overdrive[/red].",
+  "TIDUS-OVERDRIVE_READY_POWER.smartDescription": "You can now use [red]Overdrive[/red].",
+  "TIDUS-OVERDRIVE_READY_POWER.title": "Overdrive"
 }

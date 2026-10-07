@@ -86,6 +86,7 @@ public class DartAndWeave() : TidusCard(
             await CommonActions.CardAttack(this, target)
                 .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
                 .Execute(choiceContext);
+            await tidus.delay(ownerCreature, 0.1f);
             await tidus.Retreat(ownerCreature, duration: 0.2f);
             return;
         }

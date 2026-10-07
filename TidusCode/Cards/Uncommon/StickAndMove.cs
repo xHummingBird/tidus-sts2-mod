@@ -1,6 +1,6 @@
 ﻿namespace Tidus.TidusCode.Cards.Uncommon;
 
-public class SitckAndMove
+public class StickAndMove
 {
     
 }
