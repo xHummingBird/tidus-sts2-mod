@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
@@ -39,20 +40,20 @@ public class Haymaker() : TidusCard(
         {
             AudioHelper.PlayRandomAttackHard();
             tidus.PlayAnimation(ownerCreature, "attack_2");
-            await tidus.DashTo(ownerCreature, target, durationSeconds: 0.15f, overrideAnim: null);
+            await tidus.DashTo(ownerCreature, play.Target, durationSeconds: 0.15f, overrideAnim: null);
             SfxCmd.Play("res://Tidus/sfx/swing_1.wav");
             await tidus.Delay(ownerCreature, 0.05f);
-            tidus.PlayVfxOnTarget(target, "res://Tidus/scenes/vfx.tscn", "hit");
-            await CommonActions.CardAttack(this, target)
+            tidus.PlayVfxOnTarget(play.Target, "res://Tidus/scenes/vfx.tscn", "hit");
+            await CommonActions.CardAttack(this, play.Target)
                 .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
                 .Execute(choiceContext);
-            await tidus.delay(ownerCreature, 0.1f);
+            await tidus.Delay(ownerCreature, 0.15f);
             await tidus.Retreat(ownerCreature, duration: 0.2f);
             await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].BaseValue, Owner.Creature, this);
             return;
         }
 
-        await CommonActions.CardAttack(this, target)
+        await CommonActions.CardAttack(this, play.Target)
             .WithHitFx( null, "res://Tidus/sfx/hit_2.wav")
             .Execute(choiceContext);
         await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].BaseValue, Owner.Creature, this);

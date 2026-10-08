@@ -21,7 +21,7 @@ public class Windup() : TidusCard(
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(10m, ValueProp.Move),
-        new EnergyVar(1m)
+        new EnergyVar(1)
     ];
     
     protected override async Task OnPlay(
@@ -34,20 +34,20 @@ public class Windup() : TidusCard(
         {
             AudioHelper.PlayRandomAttackHard();
             tidus.PlayAnimation(ownerCreature, "attack_2");
-            await tidus.DashTo(ownerCreature, target, durationSeconds: 0.15f, overrideAnim: null);
+            await tidus.DashTo(ownerCreature, play.Target, durationSeconds: 0.15f, overrideAnim: null);
             SfxCmd.Play("res://Tidus/sfx/swing_1.wav");
             await tidus.Delay(ownerCreature, 0.05f);
-            tidus.PlayVfxOnTarget(target, "res://Tidus/scenes/vfx.tscn", "hit");
-            await CommonActions.CardAttack(this, target)
+            tidus.PlayVfxOnTarget(play.Target, "res://Tidus/scenes/vfx.tscn", "hit");
+            await CommonActions.CardAttack(this, play.Target)
                 .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
                 .Execute(choiceContext);
-            await tidus.delay(ownerCreature, 0.1f);
+            await tidus.Delay(ownerCreature, 0.15f);
             await tidus.Retreat(ownerCreature, duration: 0.2f);
             base.EnergyCost.SetThisCombat(0);
             return;
         }
 
-        await CommonActions.CardAttack(this, target)
+        await CommonActions.CardAttack(this, play.Target)
             .WithHitFx( null, "res://Tidus/sfx/hit_2.wav")
             .Execute(choiceContext);
         base.EnergyCost.SetThisCombat(0);

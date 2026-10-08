@@ -60,7 +60,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="TidusCode\Cards\Rare\" />
         <Folder Include="TidusCode\Nodes\" />
         <Folder Include="Tidus\images\card_portraits\big\"/>
         <Folder Include="Tidus\images\powers\big\"/>

@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
+using Tidus.TidusCode.Cards.Rare;
 using Tidus.TidusCode.Mechanics;
 using Tidus.TidusCode.Powers;
 
@@ -21,8 +22,12 @@ public abstract class OverdriveRelicBase : TidusRelic
 {
     [SavedProperty]
     public int StoredOverdrive { get; internal set; }
+
+    public int BlitzUsedThisCombat { get; private set; }
     
     private bool _triggerOverkill;
+
+    public bool HasTriggeredBlitzThisCombat => BlitzUsedThisCombat > 0;
 
     public virtual int MaxOverdrive => 100;
     
@@ -43,6 +48,8 @@ public abstract class OverdriveRelicBase : TidusRelic
         Status = RelicStatus.Normal;
         _triggerOverkill = false;
         OverdriveManager.ResetOverdrive(Owner);
+        
+        BlitzUsedThisCombat = 0;
 
         return Task.CompletedTask;
     }
@@ -98,6 +105,8 @@ public abstract class OverdriveRelicBase : TidusRelic
         
         if (BlitzExecutionContext.IsResolving(card))
         {
+            BlitzUsedThisCombat++;
+            
             amount = CalculateBlitzDiscardGain(card);
 
             amount = ModifyBlitzDiscardOverdriveGain(
@@ -125,11 +134,7 @@ public abstract class OverdriveRelicBase : TidusRelic
                 Owner.Creature,
                 null);
     }
-
-    // =====================================================================
-    // BASE CALCULATIONS
-    // =====================================================================
-
+    
     protected virtual int CalculateTurnStartGain()
     {
         int amount = OverdrivePerTurn;
@@ -261,48 +266,48 @@ public abstract class OverdriveRelicBase : TidusRelic
             return;
 
         if (!target.Powers.All(
-                p => p.ShouldOwnerDeathTriggerFatal()))
+                power => power.ShouldOwnerDeathTriggerFatal()))
         {
             return;
         }
 
         int overkillThreshold =
-            (int)Math.Ceiling(
-                target.MaxHp * 0.20m);
+            (int)Math.Ceiling(target.MaxHp * 0.20m);
 
         if (Owner.GetRelic<TamingSword>() != null)
         {
             overkillThreshold =
-                (int)Math.Ceiling(
-                    target.MaxHp * 0.12m);
+                (int)Math.Ceiling(target.MaxHp * 0.12m);
         }
-
-        /*
-         * Amount reaching HP after block.
-         */
+        
         decimal hpDamage =
-            Math.Max(
-                amount - target.Block,
-                0);
+            Math.Max(amount - target.Block, 0);
 
         bool lethal =
             hpDamage >= target.CurrentHp;
+        
+        bool forcedOverkill =
+            cardSource is Overkill;
 
-        bool overkill =
+        bool meetsOverkillThreshold =
             amount >= overkillThreshold;
 
-        if (!lethal || !overkill)
+        bool overkill =
+            lethal &&
+            (forcedOverkill || meetsOverkillThreshold);
+
+        if (!overkill)
             return;
 
-        _triggerOverkill =
-            true;
+        _triggerOverkill = true;
 
         if (dealer?.Player?.Character is Character.Tidus tidus)
         {
             tidus.PlayVfxOnTarget(
                 target,
                 "res://Tidus/scenes/vfx.tscn",
-                "overkill");
+                "overkill"
+            );
         }
     }
     
