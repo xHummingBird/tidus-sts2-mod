@@ -48,7 +48,7 @@ public class DualSmash() : TidusCard(1, CardType.Attack,
                 .Execute(choiceContext);
             await tidus.Retreat(ownerCreature, duration: 0.2F);
         }
-        else  await CommonActions.CardAttack(this, play.Target)
+        else  await CommonActions.CardAttack(this, play.Target, 2)
             .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
             .Execute(choiceContext);
         OverdriveManager.GainOverdrive(Owner, DynamicVars["Overdrive"].IntValue);

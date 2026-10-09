@@ -9,7 +9,7 @@ using Tidus.TidusCode.Mechanics;
 
 namespace Tidus.TidusCode.Cards.Rare;
 
-public class DreamOfDreams() : TidusCard(
+public class FleetingDreams() : TidusCard(
     1,
     CardType.Power,
     CardRarity.Rare,
@@ -17,15 +17,15 @@ public class DreamOfDreams() : TidusCard(
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<DreamOfDreamsPower>(1)
+        new PowerVar<FleetingDreamsPower>(1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await PowerCmd.Apply<DreamOfDreamsPower>(
+        await PowerCmd.Apply<FleetingDreamsPower>(
             choiceContext,
             Owner.Creature,
-            DynamicVars["DreamOfDreamsPower"].BaseValue,
+            DynamicVars["FleetingDreamsPower"].BaseValue,
             Owner.Creature,
             this);
     }

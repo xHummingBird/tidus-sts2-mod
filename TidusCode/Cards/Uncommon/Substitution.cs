@@ -44,7 +44,7 @@ public class Substitution() : TidusCard(
                 await ApplyStrength(choiceContext);
             }
 
-            await OnBlitz(choiceContext, play.Target);
+            await OnBlitz(choiceContext, Owner.Creature);
             return;
         }
 
@@ -52,7 +52,7 @@ public class Substitution() : TidusCard(
 
         if (Owner?.Creature.HasPower<HastePower>() == true)
         {
-            await OnBlitz(choiceContext, play.Target);
+            await OnBlitz(choiceContext, Owner.Creature);
         }
     }
 

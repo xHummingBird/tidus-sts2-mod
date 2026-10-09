@@ -19,6 +19,11 @@ public class SpeedInfusion() : TidusCard(
         new PowerVar<SpeedInfusionPower>(1)
     ];
 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
+        HoverTipFactory.FromPower<HastePower>()
+    ];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await PowerCmd.Apply<SpeedInfusionPower>(
