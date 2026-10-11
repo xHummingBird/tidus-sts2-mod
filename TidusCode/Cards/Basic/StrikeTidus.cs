@@ -35,12 +35,12 @@ public class StrikeTidus() : TidusCard(1, CardType.Attack,
                 "hit"
                 );
             await CommonActions.CardAttack(this, play.Target)
-                .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
+                .WithHitFx(null, "res://Tidus/sfx/Tidus/slash_1.wav")
                 .Execute(choiceContext);
             await tidus.Retreat(ownerCreature, duration: 0.2F);
         }
         else  await CommonActions.CardAttack(this, play.Target)
-            .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
+            .WithHitFx(null, "res://Tidus/sfx/Tidus/slash_1.wav")
             .Execute(choiceContext);
         
     }

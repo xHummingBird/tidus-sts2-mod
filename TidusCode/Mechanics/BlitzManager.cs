@@ -4,8 +4,11 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Character;
 using Tidus.TidusCode.Extensions;
+using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Mechanics;
 
@@ -59,9 +62,14 @@ public static class BlitzManager
 
             if (CombatManager.Instance.IsOverOrEnding)
                 return;
+            
+            
 
             foreach (CardModel card in blitzCards)
             {
+                decimal strengthAmount = card.Owner.Creature.GetPowerAmount<GoldenGoalPower>();
+                decimal blockAmount = card.Owner.Creature.GetPowerAmount<ClutchDefensePower>();
+                
                 if (!CanTriggerBlitz(card))
                     continue;
 
@@ -81,6 +89,9 @@ public static class BlitzManager
                             card,
                             target: null,
                             type: TidusEnums.BlitzDiscard));
+                    
+                    await PowerCmd.Apply<StrengthPower>(choiceContext, card.Owner.Creature, strengthAmount, card.Owner.Creature, null);
+                    await CreatureCmd.GainBlock(card.Owner.Creature, blockAmount, ValueProp.Unpowered, null);
                 }
                 else
                 {
@@ -89,6 +100,8 @@ public static class BlitzManager
                         card,
                         target: null,
                         type: TidusEnums.BlitzDiscard);
+                    await PowerCmd.Apply<StrengthPower>(choiceContext, card.Owner.Creature, strengthAmount, card.Owner.Creature, null);
+                    await CreatureCmd.GainBlock(card.Owner.Creature, blockAmount, ValueProp.Unpowered, null);
                 }
             }
         }

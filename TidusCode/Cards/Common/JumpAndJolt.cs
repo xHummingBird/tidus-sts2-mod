@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
@@ -46,9 +47,13 @@ public class JumpAndJolt() : TidusCard(
         if (BlitzExecutionContext.IsBlitzPlay(this))
         {
             if (Owner.HasPower<HastePower>())
+            {
+                CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
                 await ExecuteAttack(
                     choiceContext,
                     play.Target);
+                CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
+            }
             
             CardModel? cardModel = PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c.Type == CardType.Attack && !c.Keywords.Contains(CardKeyword.Unplayable)).ToList().StableShuffle(base.Owner.RunState.Rng.Shuffle)
                 .FirstOrDefault();
@@ -69,11 +74,11 @@ public class JumpAndJolt() : TidusCard(
 
             return;
         }
-        
+        CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
         await ExecuteAttack(
             choiceContext,
             play.Target);
-        
+        CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
         if (Owner?.Creature.HasPower<HastePower>() == true)
         {
             CardModel? cardModel = PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c.Type == CardType.Attack && !c.Keywords.Contains(CardKeyword.Unplayable)).ToList().StableShuffle(base.Owner.RunState.Rng.Shuffle)
@@ -113,11 +118,11 @@ public class JumpAndJolt() : TidusCard(
         {
             AudioHelper.PlayRandomAttackHard();
             tidus.PlayAnimation(ownerCreature, "attack_3");
-            await tidus.DashTo(ownerCreature, target, durationSeconds: 0.15f, overrideAnim: null);
+            await tidus.DashTo(ownerCreature, target, distance: 300f, durationSeconds: 0.15f, overrideAnim: null);
             SfxCmd.Play("res://Tidus/sfx/swing_1.wav");
             tidus.PlayVfxOnTarget(target, "res://Tidus/scenes/vfx.tscn", "hit");
             await CommonActions.CardAttack(this, target)
-                .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
+                .WithHitFx(null, "res://Tidus/sfx/Tidus/slash_3.wav")
                 .Execute(choiceContext);
             await tidus.Delay(ownerCreature, 0.15f);
             await tidus.Retreat(ownerCreature, duration: 0.2f);
@@ -127,7 +132,7 @@ public class JumpAndJolt() : TidusCard(
         await CommonActions.CardAttack(this, target)
             .WithHitFx(
                 null,
-                "res://Tidus/sfx/hit_2.wav")
+                "res://Tidus/sfx/Tidus/slash_3.wav")
             .Execute(choiceContext);
     }
 

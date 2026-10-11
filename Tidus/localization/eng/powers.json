@@ -5,5 +5,77 @@
 
   "TIDUS-OVERDRIVE_READY_POWER.description": "Perform [red]Overdrive[/red] when you reach 100 [red]Overdrive[/red].",
   "TIDUS-OVERDRIVE_READY_POWER.smartDescription": "You can now use [red]Overdrive[/red].",
-  "TIDUS-OVERDRIVE_READY_POWER.title": "Overdrive"
+  "TIDUS-OVERDRIVE_READY_POWER.title": "Overdrive",
+  
+  "TIDUS-BREAK_DAMAGE_LIMIT_POWER.description": "Deal [blue]25%[/blue] more damage to enemies with [gold]Delay[/gold] while you have [gold]Haste[/gold].",
+  "TIDUS-BREAK_DAMAGE_LIMIT_POWER.smartDescription": "Deal [blue]{Amount}%[/blue] more damage to enemies with [gold]Delay[/gold] while you have [gold]Haste[/gold].",
+  "TIDUS-BREAK_DAMAGE_LIMIT_POWER.title": "Break Damage Limit",
+
+  "TIDUS-BREAK_MP_LIMIT_POWER.description": "At the start of your turn, gain {energyPrefix:energyIcons(1)}.",
+  "TIDUS-BREAK_MP_LIMIT_POWER.smartDescription": "At the start of your turn, gain {Amount:energyIcons()}.",
+  "TIDUS-BREAK_MP_LIMIT_POWER.title": "Break MP Limit",
+
+  "TIDUS-BLITZ_MANIA_POWER.description": "Skills gain [blue]Blitz[/blue] and apply their card effects when discarded.",
+  "TIDUS-BLITZ_MANIA_POWER.smartDescription": "Skills gain [blue]Blitz[/blue] and apply their card effects when discarded.",
+  "TIDUS-BLITZ_MANIA_POWER.title": "Blitz Mania",
+
+  "TIDUS-ACE_OF_ZANARKAND_POWER.description": "At the end of your turn, you no longer discard your [gold]Hand[/gold].",
+  "TIDUS-ACE_OF_ZANARKAND_POWER.smartDescription": "At the end of your turn, you no longer discard your [gold]Hand[/gold].",
+  "TIDUS-ACE_OF_ZANARKAND_POWER.title": "Ace of Zanarkand",
+
+  "TIDUS-FLEETING_DREAMS_POWER.description": "At the start of your turn, draw [blue]1[/blue] card and discard [blue]1[/blue] card.",
+  "TIDUS-FLEETING_DREAMS_POWER.smartDescription": "At the start of your turn, draw [blue]{Amount}[/blue] {Amount:plural:card|cards} and discard [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
+  "TIDUS-FLEETING_DREAMS_POWER.title": "Fleeting Dreams",
+
+  "TIDUS-STRIKER_POWER.description": "The first Attack each turn deals [blue]50%[/blue] additional damage.",
+  "TIDUS-STRIKER_POWER.smartDescription": "The first Attack each turn deals [blue]{Amount}%[/blue] additional damage.",
+  "TIDUS-STRIKER_POWER.title": "Striker",
+
+  "TIDUS-THE_NEW_GUARDIAN_POWER.description": "Whenever you play a Power, gain {energyPrefix:energyIcons(1)}.",
+  "TIDUS-THE_NEW_GUARDIAN_POWER.smartDescription": "Whenever you play a Power, gain {Amount:energyIcons()}.",
+  "TIDUS-THE_NEW_GUARDIAN_POWER.title": "The New Guardian",
+
+  "TIDUS-SPEED_INFUSION_POWER.description": "Whenever you play a card that costs [blue]2[/blue] Energy or more, gain [gold]Haste[/gold].",
+  "TIDUS-SPEED_INFUSION_POWER.smartDescription": "Whenever you play a card that costs [blue]2[/blue] Energy or more, gain [blue]{Amount}[/blue] [gold]Haste[/gold].",
+  "TIDUS-SPEED_INFUSION_POWER.title": "Speed Infusion",
+
+  "TIDUS-CLUTCH_DEFENSE_POWER.description": "Whenever you trigger [blue]Blitz[/blue] through discard, gain [blue]4[/blue] [gold]Block[/gold].",
+  "TIDUS-CLUTCH_DEFENSE_POWER.smartDescription": "Whenever you trigger [blue]Blitz[/blue] through discard, gain [blue]{Amount}[/blue] [gold]Block[/gold].",
+  "TIDUS-CLUTCH_DEFENSE_POWER.title": "Clutch Defense",
+
+  "TIDUS-GAME_SENSE_POWER.description": "Whenever you apply [gold]Delay[/gold], draw [blue]1[/blue] card.",
+  "TIDUS-GAME_SENSE_POWER.smartDescription": "Whenever you apply [gold]Delay[/gold], draw [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
+  "TIDUS-GAME_SENSE_POWER.title": "Game Sense",
+
+  "TIDUS-GOLDEN_GOAL_POWER.description": "Whenever you trigger [blue]Blitz[/blue] through discard, gain [blue]1[/blue] [gold]Strength[/gold].",
+  "TIDUS-GOLDEN_GOAL_POWER.smartDescription": "Whenever you trigger [blue]Blitz[/blue] through discard, gain [blue]{Amount}[/blue] [gold]Strength[/gold].",
+  "TIDUS-GOLDEN_GOAL_POWER.title": "Golden Goal",
+
+  "TIDUS-PREEMPTIVE_STRIKE_POWER.description": "Whenever you gain [gold]Haste[/gold], deal [blue]9[/blue] damage to ALL enemies.",
+  "TIDUS-PREEMPTIVE_STRIKE_POWER.smartDescription": "Whenever you gain [gold]Haste[/gold], deal [blue]{Amount}[/blue] damage to ALL enemies.",
+  "TIDUS-PREEMPTIVE_STRIKE_POWER.title": "Preemptive Strike",
+
+  "TIDUS-PLAYMAKER_POWER.description": "Whenever you draw a [blue]Blitz[/blue] card, draw [blue]1[/blue] card.",
+  "TIDUS-PLAYMAKER_POWER.smartDescription": "Whenever you draw a [blue]Blitz[/blue] card, draw [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
+  "TIDUS-PLAYMAKER_POWER.title": "Playmaker",
+
+  "TIDUS-DELAY_POWER.description": "Attacks deal [blue]25%[/blue] less damage. While the attacker has [gold]Haste[/gold], receive [blue]25%[/blue] more damage from Attacks.",
+  "TIDUS-DELAY_POWER.smartDescription": "Attacks deal [blue]25%[/blue] less damage. While the attacker has [gold]Haste[/gold], receive [blue]25%[/blue] more damage from Attacks for [blue]{Amount}[/blue] {Amount:plural:turn|turns}.",
+  "TIDUS-DELAY_POWER.title": "Delay",
+
+  "TIDUS-CHEER_POWER.description": "Gain [gold]Strength[/gold] and [gold]Dexterity[/gold] until the end of this turn.",
+  "TIDUS-CHEER_POWER.smartDescription": "Gain [blue]{Amount}[/blue] [gold]Strength[/gold] and [blue]{Amount}[/blue] [gold]Dexterity[/gold] until the end of this turn.",
+  "TIDUS-CHEER_POWER.title": "Cheer",
+
+  "TIDUS-VENOM_TACKLE_POWER.description": "Attacks deal less damage this turn.",
+  "TIDUS-VENOM_TACKLE_POWER.smartDescription": "Attacks deal [blue]{Amount}[/blue] less damage this turn.",
+  "TIDUS-VENOM_TACKLE_POWER.title": "Venom Tackle",
+
+  "TIDUS-AMPLIFY_DELAY_POWER.description": "[gold]Delay[/gold] causes enemies to deal [blue]50%[/blue] less damage instead of [blue]25%[/blue].",
+  "TIDUS-AMPLIFY_DELAY_POWER.smartDescription": "[gold]Delay[/gold] causes enemies to deal [blue]50%[/blue] less damage instead of [blue]25%[/blue] for [blue]{Amount}[/blue] {Amount:plural:turn|turns}.",
+  "TIDUS-AMPLIFY_DELAY_POWER.title": "Amplify Delay",
+
+  "TIDUS-EVADE_AND_COUNTER_POWER.description": "Blocked damage is reflected to your attacker.",
+  "TIDUS-EVADE_AND_COUNTER_POWER.smartDescription": "Blocked damage is reflected to your attacker for [blue]{Amount}[/blue] {Amount:plural:turn|turns}.",
+  "TIDUS-EVADE_AND_COUNTER_POWER.title": "Evade & Counter"
 }

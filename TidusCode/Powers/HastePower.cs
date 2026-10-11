@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Cards.Rare;
 
 namespace Tidus.TidusCode.Powers;
@@ -20,6 +21,12 @@ public class HastePower : TidusPower
             return;
 
         await PowerCmd.Decrement(this);
+        var ownerCreature = Owner;
+        var tidus = Owner?.Player.Character as Character.Tidus;
+        if (ownerCreature != null && tidus != null)
+        {
+            tidus.PlayAnimation(ownerCreature, "idle");
+        }
     }
     
     public override bool TryModifyEnergyCostInCombatLate(
@@ -47,4 +54,40 @@ public class HastePower : TidusPower
         return true;
     }
 
+    public override async Task AfterApplied(
+        Creature? applier,
+        CardModel? cardSource)
+    {
+        var ownerCreature = Owner;
+        var tidus = Owner?.Player.Character as Character.Tidus;
+        if (ownerCreature != null && tidus != null)
+        {
+            tidus.PlayAnimation(ownerCreature, "idle");
+        }
+    }
+
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource,
+        CardPlay? cardPlay)
+    {
+        if (dealer != Owner)
+        {
+            return 1m;
+        }
+
+        // Only SpiralCut receives the damage bonus.
+        if (cardSource is not SpiralCut)
+        {
+            return 1m;
+        }
+        
+        if (cardSource.IsUpgraded)
+            return 1.66m;
+        
+        return 1.5m;
+    }
 }

@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
@@ -30,7 +31,7 @@ public class DualSmash() : TidusCard(1, CardType.Attack,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         var ownerCreature = Owner?.Creature;
-
+        CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
         if (ownerCreature != null && Owner?.Character is Character.Tidus tidus)
         {
             AudioHelper.PlayRandomAttack();
@@ -44,14 +45,15 @@ public class DualSmash() : TidusCard(1, CardType.Attack,
                 "hit"
                 );
             await CommonActions.CardAttack(this, play.Target, 2)
-                .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
+                .WithHitFx(null, "res://Tidus/sfx/Tidus/slash_1.wav")
                 .Execute(choiceContext);
             await tidus.Retreat(ownerCreature, duration: 0.2F);
         }
         else  await CommonActions.CardAttack(this, play.Target, 2)
-            .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
+            .WithHitFx(null, "res://Tidus/sfx/Tidus/slash_1.wav")
             .Execute(choiceContext);
         OverdriveManager.GainOverdrive(Owner, DynamicVars["Overdrive"].IntValue);
+        CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
     }
 
     protected override void OnUpgrade()

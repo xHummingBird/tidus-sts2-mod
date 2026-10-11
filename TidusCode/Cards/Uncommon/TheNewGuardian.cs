@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
+using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Uncommon;
 

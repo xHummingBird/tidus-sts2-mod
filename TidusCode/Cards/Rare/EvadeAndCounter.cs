@@ -5,10 +5,11 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
+using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Rare;
 
-public class SpeedBlock() : TidusCard(2, CardType.Skill,
+public class EvadeAndCounter() : TidusCard(2, CardType.Skill,
     CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 

@@ -2,9 +2,11 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
+using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Rare;
 
@@ -36,8 +38,7 @@ public class Initiative() : TidusCard(
         CardPlay play)
     {
         await PlayerCmd.GainEnergy(
-            Owner,
-            DynamicVars.Energy.IntValue);
+            DynamicVars.Energy.IntValue, Owner);
 
         OverdriveManager.GainOverdrive(
             Owner,

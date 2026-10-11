@@ -49,7 +49,7 @@ public class QuickHit() : TidusCard(
             SfxCmd.Play("res://Tidus/sfx/swing_1.wav");
             tidus.PlayVfxOnTarget(play.Target, "res://Tidus/scenes/vfx.tscn", "hit");
             await CommonActions.CardAttack(this, play.Target)
-                .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
+                .WithHitFx(null, "res://Tidus/sfx/Tidus/slash_3.wav")
                 .Execute(choiceContext);
             await tidus.Delay(ownerCreature, 0.15f);
             await tidus.Retreat(ownerCreature, duration: 0.2f);
@@ -58,7 +58,7 @@ public class QuickHit() : TidusCard(
             await CommonActions.CardAttack(this, play.Target)
                 .WithHitFx(
                     null,
-                    "res://Tidus/sfx/hit_2.wav")
+                    "res://Tidus/sfx/Tidus/slash_3.wav")
                 .Execute(choiceContext);
         if (!Owner.HasPower<HastePower>())
             await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);

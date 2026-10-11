@@ -10,6 +10,4 @@ public class AmplifyDelayPower : TidusPower
     public override PowerType Type => PowerType.Debuff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
-    
-   
 }

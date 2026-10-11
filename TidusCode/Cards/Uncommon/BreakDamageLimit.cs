@@ -1,10 +1,13 @@
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
+using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Uncommon;
 
@@ -17,6 +20,12 @@ public class BreakDamageLimit() : TidusCard(
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<BreakDamageLimitPower>(25)
+    ];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
+        HoverTipFactory.FromPower<DelayPower>(),
+        HoverTipFactory.FromPower<HastePower>()
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

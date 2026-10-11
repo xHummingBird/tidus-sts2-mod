@@ -18,7 +18,8 @@ public class Cheer() : TidusCard(1, CardType.Skill,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new PowerVar<HastePower>(1)
+        new PowerVar<HastePower>(1),
+        new PowerVar<CheerPower>(2)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>

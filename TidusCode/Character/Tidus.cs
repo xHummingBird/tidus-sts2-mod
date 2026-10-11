@@ -362,7 +362,7 @@ public class Tidus : PlaceholderCharacterModel
         float durationSeconds = 0.3f,
         float distance = 200f,
         bool dashBehind = false,
-        string? overrideAnim = null,
+        string? overrideAnim = "dash",
         bool normalSpeed = false)
     {
         var node =
@@ -387,13 +387,6 @@ public class Tidus : PlaceholderCharacterModel
             PlayAnimation(
                 player,
                 overrideAnim,
-                normalSpeed);
-        }
-        else
-        {
-            PlayAnimation(
-                player,
-                "dash",
                 normalSpeed);
         }
 
