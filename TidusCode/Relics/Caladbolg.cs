@@ -8,7 +8,6 @@ public class Caladbolg : OverdriveRelicBase
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
     
-    protected override int OverdrivePerTurn => 5;
     protected override int OverdrivePerAttack => 6;
     protected override int OverdrivePerBlitzDiscard => 9;
     

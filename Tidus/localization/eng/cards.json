@@ -48,7 +48,7 @@
   "TIDUS-SPIRAL_CUT.description": "Deal {Damage:diff()} damage.\nIf you have [gold]Haste[/gold], deal {percentBonus:diff()}% more damage.",
   "TIDUS-SPIRAL_CUT.title": "Spiral Cut",
 
-  "TIDUS-QUICK_HIT.description": "Deal {Damage:diff()} damage.\nCosts 0 {energyPrefix:energyIcons(1)} if you have [gold]Haste[/gold].\nIf you do not have [gold]Haste[/gold], gain {HastePower:diff()} [gold]Haste[/gold].",
+  "TIDUS-QUICK_HIT.description": "Deal {Damage:diff()} damage.\nCosts 0 {energyPrefix:energyIcons(1)} if you have [gold]Haste[/gold].\nIf you do not have [gold]Haste[/gold], gain 1 [gold]Haste[/gold].",
   "TIDUS-QUICK_HIT.title": "Quick Hit",
 
   "TIDUS-JECHT_SHOT.description": "Deal {Damage:diff()} damage.\nDiscard up to 3 cards from your [gold]Hand[/gold].\nDeal {ExtraDamage:diff()} additional damage for each card discarded.",
@@ -70,37 +70,37 @@
   "TIDUS-SONIC_BUSTER.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each card discarded this turn.",
   "TIDUS-SONIC_BUSTER.title": "Sonic Buster",
 
-  "TIDUS-WITHER_SHOT.description": "Deal {Damage:diff()} damage.\n{BlitzIcon}: The next Skill you play costs 0 {energyPrefix:energyIcons(1)}.",
+  "TIDUS-WITHER_SHOT.description": "Deal {Damage:diff()} damage. \nApply any debuffs on the enemy to ALL other enemies. \n{BlitzIcon}: Apply {DelayPower:diff()} [gold]Delay[/gold] to ALL enemies.",
   "TIDUS-WITHER_SHOT.title": "Wither Shot",
 
-  "TIDUS-UP_AND_UNDER.description": "Deal {Damage:diff()} damage.\n{BlitzIcon}: Apply {DelayPower:diff()} [gold]Delay[/gold] to ALL enemies.",
+  "TIDUS-UP_AND_UNDER.description": "Deal {Damage:diff()} damage.\n{BlitzIcon}: The next Skill you play costs 0 {energyPrefix:energyIcons(1)}.",
   "TIDUS-UP_AND_UNDER.title": "Up & Under",
 
   "TIDUS-HAYMAKER.description": "Deal {Damage:diff()} damage.\nGain {HastePower:diff()} [gold]Haste[/gold].",
   "TIDUS-HAYMAKER.title": "Haymaker",
 
-  "TIDUS-DASH_ATTACK.description": "Deal {Damage:diff()} damage to ALL enemies.\nApply {DelayPower:diff()} [gold]Delay[/gold].\nIf you have [gold]Haste[/gold], apply 1 additional [gold]Delay[/gold].",
+  "TIDUS-DASH_ATTACK.description": "Deal {Damage:diff()} damage and apply 1 [gold]Delay[/gold] to ALL enemies.\nIf you have [gold]Haste[/gold], apply {DelayPower:diff()} additional [gold]Delay[/gold].",
   "TIDUS-DASH_ATTACK.title": "Dash Attack",
 
-  "TIDUS-CLUTCH_SHOT.description": "Deal {Damage:diff()} damage.\nIf you have 50% HP or less, gain [gold]Block[/gold] equal to damage dealt.\n{BlitzIcon}: Permanently increase this card's damage by {Increase:diff()}.",
+  "TIDUS-CLUTCH_SHOT.description": "Deal {Damage:diff()} damage.\nIf you have 50% HP or less, gain [gold]Block[/gold] equal to damage dealt. \n{BlitzIcon}: Permanently increase this card's damage by {Increase:diff()}.",
   "TIDUS-CLUTCH_SHOT.title": "Clutch Shot",
 
-  "TIDUS-JUMPING_VOLLEY.description": "Deal {Damage:diff()} damage.\n{BlitzIcon}: The next Attack you play costs 0 {energyPrefix:energyIcons(1)}.",
+  "TIDUS-JUMPING_VOLLEY.description": "Deal {Damage:diff()} damage. \nCosts 1 less {energyPrefix:energyIcons(1)} for each Skill played this turn. \n{BlitzIcon}: The next Attack you play costs 0 {energyPrefix:energyIcons(1)}.",
   "TIDUS-JUMPING_VOLLEY.title": "Jumping Volley",
 
   "TIDUS-FREE_THROW.description": "Deal {Damage:diff()} damage.\nNext turn, draw 2 cards.",
   "TIDUS-FREE_THROW.title": "Free Throw",
 
-  "TIDUS-SWORDPLAY.description": "Deal {Damage:diff()} damage.\n{BlitzIcon}: Gain {Overdrive:diff()} [red]Overdrive[/red].",
+  "TIDUS-SWORDPLAY.description": "Deal {Damage:diff()} damage. \nGain {Overdrive:diff()} [red]Overdrive[/red]. \n{BlitzIcon}: Gain {Overdrive:diff()} [red]Overdrive[/red].",
   "TIDUS-SWORDPLAY.title": "Swordplay",
 
-  "TIDUS-DELAY_BUSTER.description": "Deal {Damage:diff()} damage.\nApply {DelayPower:diff()} [gold]Delay[/gold].\nDouble its damage reduction for {AmplifyDelayPower:diff()} {AmplifyDelayPower:plural:turn|turns}.",
+  "TIDUS-DELAY_BUSTER.description": "Deal {Damage:diff()} damage.\nApply {DelayPower:diff()} [gold]Delay[/gold].\nDouble its damage reduction for {DelayPower:diff()} {DelayPower:plural:turn|turns}.",
   "TIDUS-DELAY_BUSTER.title": "Delay Buster",
 
   "TIDUS-JECHT_SHOT_TWO.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each {BlitzIcon} card played this combat.",
   "TIDUS-JECHT_SHOT_TWO.title": "Jecht Shot 2",
 
-  "TIDUS-ENERGY_RAIN.description": "Deal {Damage:diff()} damage to ALL enemies.\nApply {DelayPower:diff()} [gold]Delay[/gold] to ALL enemies.\nDouble its damage reduction for {AmplifyDelayPower:diff()} {AmplifyDelayPower:plural:turn|turns}.",
+  "TIDUS-ENERGY_RAIN.description": "Deal {Damage:diff()} damage to ALL enemies.\nApply 2 [gold]Delay[/gold] to ALL enemies.\nDouble its damage reduction for {DelayPower:diff()} {DelayPower:plural:turn|turns}.",
   "TIDUS-ENERGY_RAIN.title": "Energy Rain",
 
   "TIDUS-BLITZ_ACE.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for every {HpThreshold:diff()} HP lost.",
@@ -139,7 +139,7 @@
   "TIDUS-PLAYBOOK.description": "Add a random Attack into your [gold]Hand[/gold].\nIt's free to play this turn.",
   "TIDUS-PLAYBOOK.title": "Playbook",
 
-  "TIDUS-TACKLE_SLIP.description": "Gain {Block:diff()} [gold]Block[/gold].\n{BlitzIcon}: Deal {Damage:diff()} damage to a random enemy.",
+  "TIDUS-TACKLE_SLIP.description": "Deal {Damage:diff()} damage. \nGain {Block:diff()} [gold]Block[/gold].",
   "TIDUS-TACKLE_SLIP.title": "Tackle Slip",
 
   "TIDUS-ACE_SPIRIT.description": "Gain {Energy:energyIcons()}.",
@@ -184,7 +184,7 @@
   "TIDUS-BREAK_DAMAGE_LIMIT.description": "Deal {BreakDamageLimitPower:diff()}% more damage to enemies with [gold]Delay[/gold] while you have [gold]Haste[/gold].",
   "TIDUS-BREAK_DAMAGE_LIMIT.title": "Break Damage Limit",
 
-  "TIDUS-BREAK_MP_LIMIT.description": "At the start of your turn, gain {BreakMpLimitPower:energyIcons()}.",
+  "TIDUS-BREAK_MP_LIMIT.description": "At the start of your turn, gain {Energy:energyIcons()}.",
   "TIDUS-BREAK_MP_LIMIT.title": "Break MP Limit",
 
   "TIDUS-BLITZ_MANIA.description": "Skills gain {BlitzIcon} and apply their card effects when discarded.",
@@ -193,13 +193,13 @@
   "TIDUS-ACE_OF_ZANARKAND.description": "At the end of your turn, you no longer discard your [gold]Hand[/gold].",
   "TIDUS-ACE_OF_ZANARKAND.title": "Ace of Zanarkand",
 
-  "TIDUS-FLEETING_DREAMS.description": "At the start of your turn, draw {FleetingDreamsPower:diff()} {FleetingDreamsPower:plural:card|cards} and discard {FleetingDreamsPower:diff()} {FleetingDreamsPower:plural:card|cards}.",
-  "TIDUS-FLEETING_DREAMS.title": "Fleeting Dreams",
+  "TIDUS-FLEETING_DREAM.description": "At the start of your turn, draw {FleetingDreamPower:diff()} {FleetingDreamPower:plural:card|cards} and discard {FleetingDreamPower:diff()} {FleetingDreamPower:plural:card|cards}.",
+  "TIDUS-FLEETING_DREAM.title": "Fleeting Dreams",
 
   "TIDUS-STRIKER.description": "The first Attack each turn deals {StrikerPower:diff()}% additional damage.",
   "TIDUS-STRIKER.title": "Striker",
 
-  "TIDUS-THE_NEW_GUARDIAN.description": "Whenever you play a Power, gain {TheNewGuardianPower:energyIcons()}.",
+  "TIDUS-THE_NEW_GUARDIAN.description": "Whenever you play a Power, gain {Energy:energyIcons()}.",
   "TIDUS-THE_NEW_GUARDIAN.title": "The New Guardian",
 
   "TIDUS-SPEED_INFUSION.description": "Whenever you play a card that costs 2 {energyPrefix:energyIcons(1)} or more, gain {SpeedInfusionPower:diff()} [gold]Haste[/gold].",

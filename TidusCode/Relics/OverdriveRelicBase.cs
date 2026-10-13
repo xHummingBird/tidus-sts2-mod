@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
+using Tidus.TidusCode.Cards.Ancient;
 using Tidus.TidusCode.Cards.Rare;
 using Tidus.TidusCode.Mechanics;
 using Tidus.TidusCode.Powers;
@@ -26,8 +27,6 @@ public abstract class OverdriveRelicBase : TidusRelic
     public int BlitzUsedThisCombat { get; private set; }
     
     private bool _triggerOverkill;
-
-    public bool HasTriggeredBlitzThisCombat => BlitzUsedThisCombat > 0;
 
     public virtual int MaxOverdrive => 100;
     
@@ -49,7 +48,8 @@ public abstract class OverdriveRelicBase : TidusRelic
         _triggerOverkill = false;
         OverdriveManager.ResetOverdrive(Owner);
         
-        BlitzUsedThisCombat = 0;
+        if (Owner.GetRelic<Apocalypse>() != null)
+            OverdriveManager.SetOverdrive(Owner, 30);
 
         return Task.CompletedTask;
     }
@@ -101,12 +101,13 @@ public abstract class OverdriveRelicBase : TidusRelic
         if (card.Owner != Owner)
             return;
 
+        if (card is EnergyRain or BlitzAce or JechtShotTwo)
+            return;
+
         int amount = 0;
         
         if (BlitzExecutionContext.IsResolving(card))
         {
-            BlitzUsedThisCombat++;
-            
             amount = CalculateBlitzDiscardGain(card);
 
             amount = ModifyBlitzDiscardOverdriveGain(
@@ -274,7 +275,7 @@ public abstract class OverdriveRelicBase : TidusRelic
         int overkillThreshold =
             (int)Math.Ceiling(target.MaxHp * 0.20m);
 
-        if (Owner.GetRelic<TamingSword>() != null)
+        if (Owner.GetRelic<Ascalon>() != null)
         {
             overkillThreshold =
                 (int)Math.Ceiling(target.MaxHp * 0.12m);

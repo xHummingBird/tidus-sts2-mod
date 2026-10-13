@@ -67,5 +67,6 @@ public class QuickHit() : TidusCard(
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(5m);
+        AddKeyword(CardKeyword.Innate);
     }
 }

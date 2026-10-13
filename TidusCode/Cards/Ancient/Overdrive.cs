@@ -10,13 +10,13 @@ using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Ancient;
 
-public class Overdrive() : TidusCard(0, CardType.Attack,
+public class Overdrive() : TidusCard(0, CardType.Skill,
     CardRarity.Ancient, TargetType.AnyEnemy)
 {
     protected override bool ShouldGlowGoldInternal => Owner.HasPower<OverdriveReadyPower>();
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(13, ValueProp.Move),
+        
     ];
 
     protected override async Task OnPlay(
@@ -39,8 +39,10 @@ public class Overdrive() : TidusCard(0, CardType.Attack,
             List<CardModel> cards = [js, er, ba];
             
             CardModel selectedFinisher = await CardSelectCmd.FromChooseACardScreen(choiceContext, cards.ToList(), base.Owner, canSkip: false);
-            await CardCmd.AutoPlay(choiceContext, selectedFinisher, null);
-         
+            if (selectedFinisher == er)
+                await CardCmd.AutoPlay(choiceContext, selectedFinisher, null);
+            else
+                await CardCmd.AutoPlay(choiceContext, selectedFinisher, play.Target);
     }
     protected override void OnUpgrade()
     {

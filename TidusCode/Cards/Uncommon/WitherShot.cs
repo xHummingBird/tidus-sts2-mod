@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BaseLib.Extensions;
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -17,7 +21,7 @@ using Tidus.TidusCode.Powers;
 namespace Tidus.TidusCode.Cards.Uncommon;
 
 public class WitherShot() : TidusCard(
-    2,
+    0,
     CardType.Attack,
     CardRarity.Uncommon,
     TargetType.AnyEnemy),
@@ -25,12 +29,18 @@ public class WitherShot() : TidusCard(
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(15m, ValueProp.Move)
+        new DamageVar(7m, ValueProp.Move),
+        new PowerVar<DelayPower>(1m)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
         TidusEnums.Blitz
+    ];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
+        HoverTipFactory.FromPower<DelayPower>()
     ];
 
     protected override async Task OnPlay(
@@ -53,7 +63,6 @@ public class WitherShot() : TidusCard(
 
             await ExecuteAttack(
                 choiceContext,
-                play,
                 play.Target);
         }
 
@@ -73,86 +82,78 @@ public class WitherShot() : TidusCard(
         PlayerChoiceContext choiceContext,
         Creature? target)
     {
-        await PowerCmd.Apply<FreeSkillPower>(
-            choiceContext,
-            Owner.Creature,
-            1m,
+        PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, DynamicVars["DelayPower"].BaseValue,
             Owner.Creature, this);
     }
 
     private async Task ExecuteAttack(
         PlayerChoiceContext choiceContext,
-        CardPlay play,
         Creature target)
     {
-        Creature ownerCreature =
-            Owner.Creature;
-
-        CenterCardCinematic.Start(
-            RunManager.Instance.NetService.NetId);
-
-        try
+        Dictionary<PowerModel, int> debuffAmounts = (from p in target.Powers
+            where p.TypeForCurrentAmount == PowerType.Debuff
+            select ((PowerModel)p.ClonePreservingMutability(), Amount: p.Amount)).ToDictionary();
+        foreach (KeyValuePair<PowerModel, int> item in debuffAmounts)
         {
-            if (Owner.Character is Character.Tidus tidus)
+            PowerModel key = item.Key;
+            ITemporaryPower temporaryPower = key as ITemporaryPower;
+            if (temporaryPower != null)
             {
-                AudioHelper.PlayRandomPhrase();
-
-                tidus.PlayAnimation(
-                    ownerCreature,
-                    "jumping_kick");
-
-                await tidus.Delay(
-                    ownerCreature,
-                    0.3f);
-
-                SfxCmd.Play(
-                    "res://Tidus/sfx/Tidus/blitz_swing.wav");
-
-                SfxCmd.Play(
-                    "res://Tidus/sfx/Tidus/blitz_impact.wav");
-
-                await tidus.Delay(
-    
-                    ownerCreature,
-                    0.05f);
-
-                tidus.PlayVfxOnTarget(
-                    target,
-                    "res://Tidus/scenes/vfx.tscn",
-                    "blitzball_hit_2");
-
-                await DamageCmd.Attack(
-                        DynamicVars.Damage.BaseValue)
-                    .FromCard(this, play)
-                    .WithHitFx(
-                        null,
-                        "res://Tidus/sfx/hit_2.wav")
-                    .Targeting(target)
-                    .Execute(choiceContext);
-                if (!ownerCreature.HasPower<HastePower>())
-                    await tidus.Delay(ownerCreature, 0.15f);
-
-                return;
+                KeyValuePair<PowerModel, int> keyValuePair = debuffAmounts.FirstOrDefault<KeyValuePair<PowerModel, int>>((KeyValuePair<PowerModel, int> p) => p.Key.Id == temporaryPower.InternallyAppliedPower.Id);
+                if (keyValuePair.Key != null)
+                {
+                    debuffAmounts[keyValuePair.Key] += item.Value;
+                }
             }
-
-            await DamageCmd.Attack(
-                    DynamicVars.Damage.BaseValue)
-                .FromCard(this, play)
-                .WithHitFx(
-                    null,
-                    "res://Tidus/sfx/hit_2.wav")
-                .Targeting(target)
-                .Execute(choiceContext);
         }
-        finally
+        
+        Creature ownerCreature = Owner.Creature;
+
+        CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
+        
+        if (ownerCreature != null && Owner?.Character is Character.Tidus tidus)
         {
-            CenterCardCinematic.End(
-                RunManager.Instance.NetService.NetId);
+            AudioHelper.PlayRandomAttackHard();
+            tidus.PlayAnimation(ownerCreature, "throw");
+            await tidus.Delay(ownerCreature, 0.1f);
+            SfxCmd.Play("res://Tidus/sfx/Tidus/blitz_swing.wav");
+            await tidus.Delay(ownerCreature, 0.05f);
+            tidus.PlayVfxOnTarget(
+                target,
+                "res://Tidus/scenes/vfx.tscn",
+                "blitzball_hit_3"
+            );
+        }
+        await CommonActions.CardAttack(this, target)
+            .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
+            .Execute(choiceContext);
+        CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
+        foreach (Creature enemy in base.CombatState.HittableEnemies)
+        {
+            if (enemy == target)
+            {
+                continue;
+            }
+            foreach (KeyValuePair<PowerModel, int> item2 in debuffAmounts)
+            {
+                if (item2.Value != 0)
+                {
+                    PowerModel powerModel = PowerCmd.FindExistingInstanceForStacking(item2.Key, enemy, item2.Key.Applier);
+                    if (powerModel != null)
+                    {
+                        await PowerCmd.ModifyAmount(choiceContext, powerModel, item2.Value, item2.Key.Applier, this);
+                        continue;
+                    }
+                    PowerModel power = (PowerModel)item2.Key.ClonePreservingMutability();
+                    await PowerCmd.Apply(choiceContext, power, enemy, item2.Value, item2.Key.Applier, this);
+                }
+            }
         }
     }
-
+    
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(5m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars["DelayPower"].UpgradeValueBy(1m);
     }
 }

@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
+using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Ancient;
 
@@ -44,6 +45,7 @@ public class JechtShotTwo() : TidusCard(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await PowerCmd.Remove<OverdriveReadyPower>(Owner.Creature);
         var ownerCreature = Owner?.Creature;
         CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
         if (ownerCreature != null && Owner?.Character is Character.Tidus tidus)
@@ -88,11 +90,12 @@ public class JechtShotTwo() : TidusCard(
             .Execute(choiceContext);
         await Task.Delay(350);
         CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
+        OverdriveManager.SetOverdrive(Owner, 0);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(7m);
+        DynamicVars.CalculationBase.UpgradeValueBy(7m);
         DynamicVars.ExtraDamage.UpgradeValueBy(1m);
     }
 }

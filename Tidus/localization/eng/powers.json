@@ -23,9 +23,9 @@
   "TIDUS-ACE_OF_ZANARKAND_POWER.smartDescription": "At the end of your turn, you no longer discard your [gold]Hand[/gold].",
   "TIDUS-ACE_OF_ZANARKAND_POWER.title": "Ace of Zanarkand",
 
-  "TIDUS-FLEETING_DREAMS_POWER.description": "At the start of your turn, draw [blue]1[/blue] card and discard [blue]1[/blue] card.",
-  "TIDUS-FLEETING_DREAMS_POWER.smartDescription": "At the start of your turn, draw [blue]{Amount}[/blue] {Amount:plural:card|cards} and discard [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
-  "TIDUS-FLEETING_DREAMS_POWER.title": "Fleeting Dreams",
+  "TIDUS-FLEETING_DREAM_POWER.description": "At the start of your turn, draw [blue]1[/blue] card and discard [blue]1[/blue] card.",
+  "TIDUS-FLEETING_DREAM_POWER.smartDescription": "At the start of your turn, draw [blue]{Amount}[/blue] {Amount:plural:card|cards} and discard [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
+  "TIDUS-FLEETING_DREAM_POWER.title": "Fleeting Dreams",
 
   "TIDUS-STRIKER_POWER.description": "The first Attack each turn deals [blue]50%[/blue] additional damage.",
   "TIDUS-STRIKER_POWER.smartDescription": "The first Attack each turn deals [blue]{Amount}%[/blue] additional damage.",

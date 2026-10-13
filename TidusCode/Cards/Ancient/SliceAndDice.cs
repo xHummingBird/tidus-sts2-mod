@@ -82,6 +82,10 @@ public class SliceAndDice() : TidusCard(
             Owner?.Character is Character.Tidus tidus)
         {
             AudioHelper.PlayRandomPhrase();
+            tidus.PlayAnimation(ownerCreature, "overdrive_cast");
+            SfxCmd.Play("res://Tidus/sfx/Tidus/limit_thunder_2.wav");
+            SfxCmd.Play("res://Tidus/sfx/Tidus/limit_start.wav");
+            await tidus.Delay(ownerCreature, 0.6f);
             await tidus.DashTo(ownerCreature, target, durationSeconds: 0.2f);
             tidus.PlayAnimation(ownerCreature, animationString);
            

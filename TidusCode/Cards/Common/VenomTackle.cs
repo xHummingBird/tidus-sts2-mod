@@ -37,6 +37,6 @@ public class VenomTackle() : TidusCard(1, CardType.Skill,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["VenomTacklePower"].UpgradeValueBy(2);
+        DynamicVars["VenomTacklePower"].UpgradeValueBy(3);
     }
 }

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -17,7 +20,7 @@ using Tidus.TidusCode.Powers;
 namespace Tidus.TidusCode.Cards.Uncommon;
 
 public class JumpingVolley() : TidusCard(
-    2,
+    3,
     CardType.Attack,
     CardRarity.Uncommon,
     TargetType.AnyEnemy),
@@ -155,5 +158,39 @@ public class JumpingVolley() : TidusCard(
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(5m);
+    }
+    
+    public override Task AfterCardEnteredCombat(CardModel card)
+    {
+        if (card != this)
+        {
+            return Task.CompletedTask;
+        }
+        if (base.IsClone)
+        {
+            return Task.CompletedTask;
+        }
+        int amount = CombatManager.Instance.History.CardPlaysFinished.Count((CardPlayFinishedEntry e) => e.CardPlay.Card.Type == CardType.Skill && e.CardPlay.Player == base.Owner && e.HappenedThisTurn(base.CombatState));
+        ReduceCostBy(amount);
+        return Task.CompletedTask;
+    }
+
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        if (cardPlay.Card.Owner != base.Owner)
+        {
+            return Task.CompletedTask;
+        }
+        if (cardPlay.Card.Type != CardType.Skill)
+        {
+            return Task.CompletedTask;
+        }
+        ReduceCostBy(1);
+        return Task.CompletedTask;
+    }
+
+    private void ReduceCostBy(int amount)
+    {
+        base.EnergyCost.AddThisTurn(-amount);
     }
 }

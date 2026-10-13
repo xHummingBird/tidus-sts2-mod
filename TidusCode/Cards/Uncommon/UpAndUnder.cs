@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
@@ -24,17 +25,11 @@ public class UpAndUnder() : TidusCard(
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(10m, ValueProp.Move),
-        new PowerVar<DelayPower>(1m)
     ];
     
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
         TidusEnums.Blitz
-    ];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
-        HoverTipFactory.FromPower<DelayPower>()
     ];
 
     protected override async Task OnPlay(
@@ -75,7 +70,10 @@ public class UpAndUnder() : TidusCard(
         PlayerChoiceContext choiceContext,
         Creature? target)
     {
-        PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, DynamicVars["DelayPower"].BaseValue,
+        await PowerCmd.Apply<FreeSkillPower>(
+            choiceContext,
+            Owner.Creature,
+            1m,
             Owner.Creature, this);
     }
 
@@ -113,6 +111,5 @@ public class UpAndUnder() : TidusCard(
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(4m);
-        DynamicVars["DelayPower"].UpgradeValueBy(1m);
     }
 }

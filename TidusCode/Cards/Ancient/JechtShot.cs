@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
+using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Ancient;
 
@@ -23,7 +24,7 @@ public class JechtShot() : TidusCard(
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(13m, ValueProp.Move),
+        new DamageVar(15m, ValueProp.Move),
         new ExtraDamageVar(2m),
         new CardsVar(3)
     ];
@@ -96,7 +97,7 @@ public class JechtShot() : TidusCard(
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(5m);
+        AddKeyword(CardKeyword.Retain);
         DynamicVars.ExtraDamage.UpgradeValueBy(1m);
     }
 }

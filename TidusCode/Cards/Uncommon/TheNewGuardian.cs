@@ -18,7 +18,8 @@ public class TheNewGuardian() : TidusCard(
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<TheNewGuardianPower>(1)
+        new PowerVar<TheNewGuardianPower>(1),
+        new EnergyVar(1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

@@ -1,13 +1,26 @@
 {
   "TIDUS-BROTHERHOOD.description": "Gain 5 [gold]Overdrive[/gold] at the start of every turn. [gold]Overkill[/gold] enemies to gain better rewards.",
-  "TIDUS-BROTHERHOOD.flavor": "",
+  "TIDUS-BROTHERHOOD.flavor": "This is my story",
   "TIDUS-BROTHERHOOD.title": "Brotherhood",
-
-  "TIDUS-CALADBOLG.description": "Gain 3 additional [gold]Overdrive[/gold] from playing [gold]Blitz[/gold] and from Attacks. Upgrade your [gold]Overdrive[/gold].",
-  "TIDUS-CALADBOLG.flavor": "",
+  "TIDUS-CALADBOLG.description": "Upgrade your [gold]Overdrive[/gold]. Gain 3 additional [gold]Overdrive[/gold] from Attacks, and from [gold]Blitz[/gold] activation.",
+  "TIDUS-CALADBOLG.flavor": "This should really be called Ultima Weapon",
   "TIDUS-CALADBOLG.title": "Caladbolg",
-
-  "TIDUS-TAMING_SWORD.description": "Reduce [gold]Overkill[/gold] threshold to 12%.",
-  "TIDUS-TAMING_SWORD.flavor": "",
-  "TIDUS-TAMING_SWORD.title": "Taming Sword"
+  "TIDUS-LONGSWORD.description": "At the start of combat, apply 1 [gold]Delay[/gold] to ALL enemies.",
+  "TIDUS-LONGSWORD.flavor": "A gift from Jecht.",
+  "TIDUS-LONGSWORD.title": "Longsword",
+  "TIDUS-ASCALON.description": "Reduce [gold]Overkill[/gold] requirement to 12% Max HP.",
+  "TIDUS-ASCALON.flavor": "A sword used to slay dragons.",
+  "TIDUS-ASCALON.title": "Ascalon",
+  "TIDUS-APOCALYPSE.description": "Start combat with 30 [red]Overdrive[/red].",
+  "TIDUS-APOCALYPSE.flavor": "To draw this black blade is to know the horrors of war and welcome them.",
+  "TIDUS-APOCALYPSE.title": "Apocalypse",
+  "TIDUS-TRI_STEEL.description": "Whenever you discard a card during your turn, gain 3 [gold]Vigor[/gold].",
+  "TIDUS-TRI_STEEL.flavor": "Jack of all trades, master of none.",
+  "TIDUS-TRI_STEEL.title": "Tri-Steel",
+  "TIDUS-FORCE_SABER.description": "At the start of combat, gain {HastePower:diff(1)}.",
+  "TIDUS-FORCE_SABER.flavor": "A guardian's blade",
+  "TIDUS-FORCE_SABER.title": "Force Saber",
+  "TIDUS-OFFICIAL_BALL.description": "At the start of combat, add 2 random [gold]Blitz[/gold] cards to your hand.",
+  "TIDUS-OFFICIAL_BALL.flavor": "The ball every blitzball player dreams of holding.",
+  "TIDUS-OFFICIAL_BALL.title": "Official Ball"
 }
