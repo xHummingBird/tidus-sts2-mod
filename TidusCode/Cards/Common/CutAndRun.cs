@@ -101,8 +101,8 @@ public class CutAndRun() : TidusCard(
             }
             
             await DamageCmd.Attack(totalDamage)
-                .TargetingAllOpponents(CombatState)
                 .FromCard(this, play)
+                .TargetingAllOpponents(CombatState)
                 .WithValueProp(ValueProp.Move)
                 .WithHitFx(null)
                 .Execute(choiceContext);
@@ -112,8 +112,8 @@ public class CutAndRun() : TidusCard(
         }
         else
             await DamageCmd.Attack(totalDamage)
-                .TargetingAllOpponents(CombatState)
                 .FromCard(this, play)
+                .TargetingAllOpponents(CombatState)
                 .WithValueProp(ValueProp.Move)
                 .WithHitFx(null)
                 .Execute(choiceContext);
@@ -121,6 +121,6 @@ public class CutAndRun() : TidusCard(
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

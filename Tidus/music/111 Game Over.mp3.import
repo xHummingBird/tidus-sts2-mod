@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dhjugtv2dx6l"
+path="res://.godot/imported/111 Game Over.mp3-8036f1cf32e98aebc7f9db4d4161f65a.mp3str"
+
+[deps]
+
+source_file="res://Tidus/music/111 Game Over.mp3"
+dest_files=["res://.godot/imported/111 Game Over.mp3-8036f1cf32e98aebc7f9db4d4161f65a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

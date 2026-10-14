@@ -54,7 +54,7 @@ public partial class TidusOverdriveDisplay : Control
      * Hover-tip position relative to the display.
      */
     private static readonly Vector2 HoverTipOffset =
-        new(-60f, -350f);
+        new(-60f, -450f);
 
     private Control? _display;
     private TextureRect? _overlay;

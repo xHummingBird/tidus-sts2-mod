@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://df7dr4xa5c0rd"
+path="res://.godot/imported/417 Aeon Battle.mp3-d29e0d94e1584bab6c60d3edb3f9de4a.mp3str"
+
+[deps]
+
+source_file="res://Tidus/music/417 Aeon Battle.mp3"
+dest_files=["res://.godot/imported/417 Aeon Battle.mp3-d29e0d94e1584bab6c60d3edb3f9de4a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

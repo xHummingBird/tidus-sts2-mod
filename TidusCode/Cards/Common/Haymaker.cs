@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
@@ -35,7 +36,7 @@ public class Haymaker() : TidusCard(
         CardPlay play)
     {
         var ownerCreature =Owner?.Creature;
-
+        CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
         if (ownerCreature != null && Owner?.Character is Character.Tidus tidus)
         {
             AudioHelper.PlayRandomAttackHard();
@@ -56,6 +57,7 @@ public class Haymaker() : TidusCard(
         await CommonActions.CardAttack(this, play.Target)
             .WithHitFx( null, "res://Tidus/sfx/Tidus/slash_2.wav")
             .Execute(choiceContext);
+        CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
         await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].BaseValue, Owner.Creature, this);
     }
 

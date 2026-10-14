@@ -82,7 +82,7 @@ public class JechtShotTwo() : TidusCard(
                 "jecht_shot_hit"
             );
         }
-        await DamageCmd.Attack(DynamicVars.CalculatedDamage.BaseValue)
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage)
             .WithValueProp(ValueProp.Move)
             .WithHitFx(null, "res://Tidus/sfx/Tidus/jecht_shot_hit.wav")
             .FromCard(this, play)

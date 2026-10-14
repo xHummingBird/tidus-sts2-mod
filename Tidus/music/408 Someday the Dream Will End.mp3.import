@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d4jfly4lkavvh"
+path="res://.godot/imported/408 Someday the Dream Will End.mp3-3f0c44789d82d9c54f42c2a2fb25f499.mp3str"
+
+[deps]
+
+source_file="res://Tidus/music/408 Someday the Dream Will End.mp3"
+dest_files=["res://.godot/imported/408 Someday the Dream Will End.mp3-3f0c44789d82d9c54f42c2a2fb25f499.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

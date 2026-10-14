@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dpp2y6sb4fimr"
+path="res://.godot/imported/116 Enemy Attack.mp3-09d08131983c50c8aa7f7e30d23cffce.mp3str"
+
+[deps]
+
+source_file="res://Tidus/music/116 Enemy Attack.mp3"
+dest_files=["res://.godot/imported/116 Enemy Attack.mp3-09d08131983c50c8aa7f7e30d23cffce.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

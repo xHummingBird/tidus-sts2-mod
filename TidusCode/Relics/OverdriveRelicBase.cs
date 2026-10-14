@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -7,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
@@ -14,6 +16,7 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Cards.Ancient;
 using Tidus.TidusCode.Cards.Rare;
+using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
 using Tidus.TidusCode.Powers;
 
@@ -42,17 +45,55 @@ public abstract class OverdriveRelicBase : TidusRelic
     protected virtual int HasteBlitzBonus => 3;
 
     public override bool ShowCounter => false;
+    
 
     public override Task BeforeCombatStart()
     {
         Status = RelicStatus.Normal;
         TriggerOverkill = false;
+
         OverdriveManager.ResetOverdrive(Owner);
-        
+
         if (Owner.GetRelic<Apocalypse>() != null)
             OverdriveManager.SetOverdrive(Owner, 30);
+        
+        var room = Owner.RunState.CurrentRoom;
+
+        if (!room.RoomType.IsCombatRoom())
+            return Task.CompletedTask;
+        
+        BattleTheme.Play(
+            RunManager.Instance.NetService.NetId,
+            Owner.RunState.CurrentActIndex + 1,
+            room.RoomType);
 
         return Task.CompletedTask;
+    }
+    
+    public override async Task AfterCombatVictory(
+        CombatRoom room)
+    {
+        Creature? creature = Owner?.Creature;
+    
+        if (creature == null)
+            return;
+    
+        // Only the client controlling Tidus runs local visuals/audio.
+        if (!LocalContext.IsMe(creature))
+            return;
+        
+        // Only boss combats play the fanfare and delay Tidus's rewards.
+        bool isBoss =
+            room.RoomType == RoomType.Boss;
+        
+        BattleTheme.PlayVictoryFanfare(
+            RunManager.Instance.NetService.NetId,
+            isBoss);
+    
+        if (!isBoss)
+            return;
+    
+        await Task.Delay(4000);
     }
     
     public override async Task AfterSideTurnStartLate(
@@ -76,8 +117,11 @@ public abstract class OverdriveRelicBase : TidusRelic
 
         amount = ModifyTurnStartOverdriveGain(
             amount);
-
-        GainOverdrive(amount);
+        
+        if (Owner.Creature.CurrentHp * 2 <= Owner.Creature.MaxHp)
+            GainOverdrive(amount*2);
+        
+        else GainOverdrive(amount);
         
         await OverdriveManager.CheckOverdriveReady(
             Owner.Creature,
@@ -128,7 +172,10 @@ public abstract class OverdriveRelicBase : TidusRelic
             card,
             amount);
 
-        GainOverdrive(amount);
+        if (Owner.Creature.CurrentHp * 2 <= Owner.Creature.MaxHp)
+            GainOverdrive(amount*2);
+        
+        else GainOverdrive(amount);
         
         await OverdriveManager.CheckOverdriveReady(
                 Owner.Creature,
@@ -312,66 +359,6 @@ public abstract class OverdriveRelicBase : TidusRelic
             );
         }
     }
-    
-    // public override async Task AfterDamageReceived(
-    //     PlayerChoiceContext choiceContext,
-    //     Creature target,
-    //     DamageResult result,
-    //     ValueProp props,
-    //     Creature? dealer,
-    //     CardModel? cardSource)
-    // {
-    //     GD.Print("OVERKILL RELIC HOOK");
-    //     
-    //     int overkillThreshold = (int)Math.Ceiling(target.MaxHp * 0.20m);
-    //
-    //     var relic = Owner.GetRelic<TamingSword>();
-    //    
-    //     if (relic != null)
-    //         overkillThreshold = (int)Math.Ceiling(target.MaxHp * 0.12m);
-    //
-    //     int totalDamage =
-    //         result.BlockedDamage +
-    //         result.UnblockedDamage +
-    //         result.OverkillDamage;
-    //
-    //     bool triggerOverkill =
-    //         result.WasTargetKilled &&
-    //         totalDamage >= overkillThreshold;
-    //     
-    //     GD.Print($"WasKilled: {result.WasTargetKilled}");
-    //     GD.Print($"Blocked: {result.BlockedDamage}");
-    //     GD.Print($"Unblocked: {result.UnblockedDamage}");
-    //     GD.Print($"Overkill: {result.OverkillDamage}");
-    //     GD.Print($"TotalDamage: {totalDamage}");
-    //     GD.Print($"Threshold: {overkillThreshold}");
-    //     bool fatal =
-    //         target.Powers.All(
-    //             p => p.ShouldOwnerDeathTriggerFatal());
-    //     GD.Print($"Fatal: {fatal}");
-    //
-    //     if (!triggerOverkill)
-    //         return;
-    //     
-    //     if (!target.Powers.All((PowerModel p) => p.ShouldOwnerDeathTriggerFatal()))
-    //         return;
-    //     
-    //     _triggerOverkill =
-    //         true;
-    //     
-    //     GD.Print(
-    //         $"Overkill! WasKilled={result.WasTargetKilled} " +
-    //         $"Blocked={result.BlockedDamage} " +
-    //         $"Unblocked={result.UnblockedDamage}");
-    //     
-    //     if (triggerOverkill &&
-    //         dealer?.Player.Character is Character.Tidus tidus)
-    //         tidus.PlayVfxOnTarget(
-    //             target,
-    //             "res://Tidus/scenes/vfx.tscn",
-    //             "overkill"
-    //         );
-    // }
     
     public override bool TryModifyRewards(
         Player player,

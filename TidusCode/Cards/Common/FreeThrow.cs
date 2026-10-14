@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
 
@@ -22,7 +23,7 @@ public class FreeThrow() : TidusCard(2, CardType.Attack,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         var ownerCreature = Owner?.Creature;
-
+        CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
         if (ownerCreature != null && Owner?.Character is Character.Tidus tidus)
         {
             AudioHelper.PlayRandomAttackHard();
@@ -39,6 +40,7 @@ public class FreeThrow() : TidusCard(2, CardType.Attack,
         await CommonActions.CardAttack(this, play.Target)
             .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
             .Execute(choiceContext);
+        CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
         await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature, 2, Owner.Creature, this);
     }
 

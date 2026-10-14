@@ -1,12 +1,13 @@
 ﻿using HarmonyLib;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using Tidus.TidusCode.Character;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Powers;
 
@@ -16,70 +17,136 @@ public static class BlitzManager
 {
     [HarmonyPatch(
         typeof(CardCmd),
-        nameof(CardCmd.DiscardAndDraw))]
+        nameof(CardCmd.DiscardAndDraw),
+        typeof(PlayerChoiceContext),
+        typeof(IEnumerable<CardModel>),
+        typeof(int))]
     public static class CardCmdDiscardAndDrawPatch
     {
         [HarmonyPrefix]
-        public static void Prefix(
-            ref IEnumerable<CardModel> cardsToDiscard,
-            out List<CardModel> __state)
-        {
-            List<CardModel> cards =
-                cardsToDiscard.ToList();
-
-            // Both the original method and this patch use the same list.
-            cardsToDiscard = cards;
-
-            /*
-             * Any card with the Blitz keyword qualifies.
-             *
-             * Do not require IBlitz here because a power or card may
-             * temporarily give Blitz to an ordinary card.
-             */
-            __state = cards
-                .Where(IsBlitzCard)
-                .ToList();
-        }
-
-        [HarmonyPostfix]
-        public static void Postfix(
+        public static bool Prefix(
             PlayerChoiceContext choiceContext,
-            List<CardModel> __state,
+            IEnumerable<CardModel> cardsToDiscard,
+            int cardsToDraw,
             ref Task __result)
         {
-            __result = ResolveBlitzAfterDiscard(
-                __result,
+            __result = DiscardAndDrawWithBlitz(
                 choiceContext,
-                __state);
+                cardsToDiscard,
+                cardsToDraw);
+
+            return false;
         }
 
-        private static async Task ResolveBlitzAfterDiscard(
-            Task originalTask,
+        private static async Task DiscardAndDrawWithBlitz(
             PlayerChoiceContext choiceContext,
-            IReadOnlyList<CardModel> blitzCards)
+            IEnumerable<CardModel> cardsToDiscard,
+            int cardsToDraw)
         {
-            await originalTask;
-
             if (CombatManager.Instance.IsOverOrEnding)
                 return;
-            
-            
 
-            foreach (CardModel card in blitzCards)
+            List<CardModel> discardCards =
+                cardsToDiscard.ToList();
+
+            if (discardCards.Count == 0)
+                return;
+
+            CardModel firstCard =
+                discardCards[0];
+
+            ICombatState combatState =
+                firstCard.CombatState ??
+                firstCard.Owner.Creature.CombatState;
+
+            CardPile discardPile =
+                PileType.Discard.GetPile(
+                    firstCard.Owner);
+
+            List<CardModel> slyCards = [];
+            List<CardModel> blitzCards = [];
+
+            foreach (CardModel card in discardCards)
             {
-                decimal strengthAmount = card.Owner.Creature.GetPowerAmount<GoldenGoalPower>();
-                decimal blockAmount = card.Owner.Creature.GetPowerAmount<ClutchDefensePower>();
-                
-                if (!CanTriggerBlitz(card))
+                /*
+                 * Capture Sly and Blitz before moving the card.
+                 *
+                 * A temporary Blitz keyword may disappear once the card
+                 * leaves the hand, so eligibility must be recorded here.
+                 */
+                if (card.IsSlyThisTurn)
+                {
+                    slyCards.Add(card);
+                }
+
+                if (IsBlitzCard(card))
+                {
+                    blitzCards.Add(card);
+                }
+
+                await CardPileCmd.Add(
+                    card,
+                    discardPile);
+
+                CombatManager.Instance.History.CardDiscarded(
+                    combatState,
+                    card);
+
+                await Hook.AfterCardDiscarded(
+                    combatState,
+                    choiceContext,
+                    card);
+            }
+
+            discardPile.InvokeContentsChanged();
+
+            if (cardsToDraw > 0)
+            {
+                await CardPileCmd.Draw(
+                    choiceContext,
+                    cardsToDraw,
+                    firstCard.Owner);
+            }
+
+            /*
+             * Preserve the original Sly behavior.
+             */
+            foreach (CardModel card in slyCards)
+            {
+                if (CombatManager.Instance.IsOverOrEnding)
+                    return;
+
+                if (card.Pile?.Type != PileType.Discard)
                     continue;
 
-                /*
-                 * Only establish the special execution context for cards
-                 * that actually implement a separate OnBlitz effect.
-                 *
-                 * Ordinary cards given Blitz dynamically are autoplayed
-                 * without this context and therefore execute OnPlay normally.
-                 */
+                await CardCmd.AutoPlay(
+                    choiceContext,
+                    card,
+                    target: null,
+                    type: AutoPlayType.SlyDiscard);
+            }
+
+            /*
+             * Resolve Blitz after drawing, matching the timing used
+             * by the original Sly implementation.
+             */
+            foreach (CardModel card in blitzCards)
+            {
+                if (CombatManager.Instance.IsOverOrEnding)
+                    return;
+
+                if (!CanResolveCapturedBlitz(card))
+                    continue;
+
+                Creature ownerCreature =
+                    card.Owner.Creature;
+
+                decimal strengthAmount =
+                    ownerCreature.GetPowerAmount<GoldenGoalPower>();
+
+                decimal blockAmount =
+                    ownerCreature.GetPowerAmount<ClutchDefensePower>();
+
                 if (card is IBlitz)
                 {
                     await BlitzExecutionContext.Run(
@@ -89,52 +156,74 @@ public static class BlitzManager
                             card,
                             target: null,
                             type: TidusEnums.BlitzDiscard));
-                    
-                    await PowerCmd.Apply<StrengthPower>(choiceContext, card.Owner.Creature, strengthAmount, card.Owner.Creature, null);
-                    await CreatureCmd.GainBlock(card.Owner.Creature, blockAmount, ValueProp.Unpowered, null);
                 }
                 else
                 {
+                    /*
+                     * A normal card that temporarily gained Blitz
+                     * resolves its ordinary OnPlay effect.
+                     */
                     await CardCmd.AutoPlay(
                         choiceContext,
                         card,
                         target: null,
                         type: TidusEnums.BlitzDiscard);
-                    await PowerCmd.Apply<StrengthPower>(choiceContext, card.Owner.Creature, strengthAmount, card.Owner.Creature, null);
-                    await CreatureCmd.GainBlock(card.Owner.Creature, blockAmount, ValueProp.Unpowered, null);
+                }
+
+                /*
+                 * The autoplayed card may have ended combat.
+                 */
+                if (CombatManager.Instance.IsOverOrEnding)
+                    return;
+
+                if (strengthAmount > 0)
+                {
+                    await PowerCmd.Apply<StrengthPower>(
+                        choiceContext,
+                        ownerCreature,
+                        strengthAmount,
+                        ownerCreature,
+                        null);
+                }
+
+                if (blockAmount > 0)
+                {
+                    await CreatureCmd.GainBlock(
+                        ownerCreature,
+                        blockAmount,
+                        ValueProp.Unpowered,
+                        null);
                 }
             }
         }
-    }
 
-    private static bool IsBlitzCard(
-        CardModel card)
-    {
-        if (card.Owner?.Character is not Character.Tidus)
-            return false;
+        private static bool IsBlitzCard(
+            CardModel card)
+        {
+            return card.Keywords.Contains(
+                TidusEnums.Blitz);
+        }
 
-        return card.Keywords.Contains(
-            TidusEnums.Blitz);
-    }
+        private static bool CanResolveCapturedBlitz(
+            CardModel card)
+        {
+            /*
+             * Do not check the Blitz keyword again here.
+             *
+             * The card was already confirmed as Blitz before it left
+             * the hand. Dynamically granted keywords may disappear
+             * after the card enters the discard pile.
+             */
+            if (card.Pile?.Type != PileType.Discard)
+                return false;
 
-    private static bool CanTriggerBlitz(
-        CardModel card)
-    {
-        if (card.Owner?.Character is not Character.Tidus)
-            return false;
+            if (card.Owner.Creature.IsDead)
+                return false;
 
-        if (!card.Keywords.Contains(TidusEnums.Blitz))
-            return false;
+            if (CombatManager.Instance.IsOverOrEnding)
+                return false;
 
-        if (card.Pile?.Type != PileType.Discard)
-            return false;
-
-        if (card.Owner.Creature.IsDead)
-            return false;
-
-        if (CombatManager.Instance.IsOverOrEnding)
-            return false;
-
-        return true;
+            return true;
+        }
     }
 }

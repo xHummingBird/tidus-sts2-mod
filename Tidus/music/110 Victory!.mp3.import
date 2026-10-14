@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dyu0haom3k6n3"
+path="res://.godot/imported/110 Victory!.mp3-7b330a702b97c968992f063f8c50307d.mp3str"
+
+[deps]
+
+source_file="res://Tidus/music/110 Victory!.mp3"
+dest_files=["res://.godot/imported/110 Victory!.mp3-7b330a702b97c968992f063f8c50307d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

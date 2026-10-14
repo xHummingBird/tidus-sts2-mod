@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwmknfmjieap7"
+path="res://.godot/imported/105b Other World (Alternate 2).mp3-abe56f3f25871a2914dfec435fdad585.mp3str"
+
+[deps]
+
+source_file="res://Tidus/music/105b Other World (Alternate 2).mp3"
+dest_files=["res://.godot/imported/105b Other World (Alternate 2).mp3-abe56f3f25871a2914dfec435fdad585.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

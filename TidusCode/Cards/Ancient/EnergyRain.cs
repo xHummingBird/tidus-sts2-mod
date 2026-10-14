@@ -48,11 +48,11 @@ public class EnergyRain() : TidusCard(0, CardType.Attack,
             await tidus.DashTo(ownerCreature, leftMostEnemy, distance: 200f, durationSeconds: 0.20F, overrideAnim: "energy_rain", normalSpeed: true);
             await tidus.Delay(ownerCreature, 0.2f, true);
             TidusExtensions.CombatHelpers.TidusFakeHit(ownerCreature, leftMostEnemy, "res://Tidus/sfx/Tidus/energy_rain_1.wav", "res://Tidus/sfx/Tidus/kick_1.wav", hitVfx: "hit");
-            await tidus.Delay(ownerCreature, 0.667f, true);
+            await tidus.Delay(ownerCreature, 0.2f, true);
             SfxCmd.Play("res://Tidus/sfx/Tidus/energy_rain_2.wav");
-            await tidus.Delay(ownerCreature, 0.533f, true);
-            AudioHelper.PlayRandomLastHit();
+            await tidus.Delay(ownerCreature, 0.4f, true);
             SfxCmd.Play("res://Tidus/sfx/Tidus/energy_rain_3.wav");
+            AudioHelper.PlayRandomLastHit();
             await tidus.Delay(ownerCreature, 0.533f, true);
             foreach (var enemy in enemies)
             {
@@ -71,7 +71,7 @@ public class EnergyRain() : TidusCard(0, CardType.Attack,
         else  await CommonActions.CardAttack(this, play.Target)
             .WithHitFx(null, "res://Tidus/sfx/Tidus/energy_rain_hit.wav")
             .Execute(choiceContext);
-        CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
+        CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
         await PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, 2, Owner.Creature, this);
         await PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, DynamicVars["DelayPower"].BaseValue, Owner.Creature, this);
         OverdriveManager.SetOverdrive(Owner, 0);

@@ -93,7 +93,7 @@ public class SphereShot() : TidusCard(
                 .WithHitFx(null, "res://Tidus/sfx/hit_2.wav")
                 .Targeting(play.Target)
                 .Execute(choiceContext);
-        CenterCardCinematic.Start(RunManager.Instance.NetService.NetId);
+        CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
     }
     
     public async Task OnBlitz(

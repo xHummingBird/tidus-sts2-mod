@@ -62,8 +62,8 @@ public class OverdriveReadyPower : TidusPower
         if (ownerCreature != null && tidus != null)
         {
             SfxCmd.Play("res://Tidus/sfx/Tidus/limit_thunder_2.wav");
-            SfxCmd.Play("res://Tidus/sounds/special (2).wav");
-            float duration = tidus.PlayAnimation(ownerCreature, "overdrive_cast").total;
+            SfxCmd.Play("res://Tidus/sounds/ready_go.wav");
+            tidus.PlayAnimation(ownerCreature, "overdrive_cast", true);
             await Task.Delay((int)(0.6f * 1000f));
         }
     }

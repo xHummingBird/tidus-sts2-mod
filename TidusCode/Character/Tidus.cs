@@ -19,6 +19,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Audio;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
@@ -755,7 +756,8 @@ public class Tidus : PlaceholderCharacterModel
             }
 
             AudioHelper.PlayRandomGameover();
-
+            BattleTheme.Stop();
+            
             var animation =
                 character.PlayAnimation(
                     __instance.Entity,
@@ -767,11 +769,39 @@ public class Tidus : PlaceholderCharacterModel
                     : 1.5f;
         }
     }
+    
+    [HarmonyPatch(
+        typeof(NAudioManager),
+        nameof(NAudioManager.PlayMusic))]
+    public static class TidusGameOverMusicPatch
+    {
+        [HarmonyPrefix]
+        public static bool Prefix(string music)
+        {
+            // Only intercept the vanilla game over music.
+            if (music != "event:/temp/sfx/game_over")
+                return true;
 
-    // =========================================================================
-    // VICTORY ANIMATION
-    // =========================================================================
+            if (RunManager.Instance == null)
+                return true;
 
+            var runState = RunManager.Instance.DebugOnlyGetState();
+
+            if (runState == null)
+                return true;
+
+            var localPlayer = LocalContext.GetMe(runState);
+
+            if (localPlayer?.Character is not Tidus)
+                return true;
+
+            BattleTheme.PlayGameOverTheme();
+
+            // Skip vanilla game over music.
+            return false;
+        }
+    }
+    
     [HarmonyPatch(
         typeof(Hook),
         nameof(Hook.AfterCombatVictory))]
@@ -787,10 +817,10 @@ public class Tidus : PlaceholderCharacterModel
                     .Creatures?
                     .Where(creature =>
                         creature.IsPlayer);
-
+    
             if (creatures == null)
                 return;
-
+    
             foreach (var creature in creatures)
             {
                 if (creature.Player?.Character
@@ -798,34 +828,34 @@ public class Tidus : PlaceholderCharacterModel
                 {
                     continue;
                 }
-
+    
                 var node =
                     NCombatRoom.Instance?
                         .GetCreatureNode(creature);
-
+    
                 var animPlayer =
                     node?
                         .Visuals?
                         .GetNodeOrNull<AnimationPlayer>(
                             "AnimationPlayer");
-
+    
                 if (animPlayer == null)
                     continue;
-
+    
                 AudioHelper.PlayRandomVictory();
-
+    
                 float speed =
                     character.GetAnimationSpeed(
                         creature);
-
+    
                 animPlayer.SpeedScale = speed;
-
+    
                 if (animPlayer.HasAnimation(
                     "victory_before"))
                 {
                     animPlayer.Play(
                         "victory_before");
-
+    
                     if (animPlayer.HasAnimation(
                         "victory"))
                     {

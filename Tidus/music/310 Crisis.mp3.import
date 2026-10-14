@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dll2o03ff4jm5"
+path="res://.godot/imported/310 Crisis.mp3-5add3211e8d5c27415439be8f26baab6.mp3str"
+
+[deps]
+
+source_file="res://Tidus/music/310 Crisis.mp3"
+dest_files=["res://.godot/imported/310 Crisis.mp3-5add3211e8d5c27415439be8f26baab6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

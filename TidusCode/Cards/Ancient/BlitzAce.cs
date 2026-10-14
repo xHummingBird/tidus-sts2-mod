@@ -123,7 +123,7 @@ public class BlitzAce() : TidusCard(
                 "res://Tidus/scenes/vfx.tscn",
                 "hit"
             );
-            await DamageCmd.Attack(DynamicVars.CalculatedDamage.BaseValue)
+            await DamageCmd.Attack(DynamicVars.CalculatedDamage)
                 .WithValueProp(ValueProp.Move)
                 .WithHitFx(null, "res://Tidus/sfx/Tidus/jecht_shot_hit.wav")
                 .FromCard(this, play)
@@ -132,7 +132,7 @@ public class BlitzAce() : TidusCard(
             await tidus.Delay(ownerCreature, 0.8f, true);
             await tidus.Retreat(ownerCreature, duration: 0.2F);
         }
-        else await DamageCmd.Attack(DynamicVars.CalculatedDamage.BaseValue)
+        else await DamageCmd.Attack(DynamicVars.CalculatedDamage)
             .WithValueProp(ValueProp.Move)
             .WithHitFx(null, "res://Tidus/sfx/Tidus/jecht_shot_hit.wav")
             .FromCard(this, play)

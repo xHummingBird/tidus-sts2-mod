@@ -81,7 +81,7 @@ public class SliceAndDice() : TidusCard(
         if (ownerCreature != null &&
             Owner?.Character is Character.Tidus tidus)
         {
-            AudioHelper.PlayRandomPhrase();
+            SfxCmd.Play("res://Tidus/sounds/ready_go.wav");
             tidus.PlayAnimation(ownerCreature, "overdrive_cast");
             SfxCmd.Play("res://Tidus/sfx/Tidus/limit_thunder_2.wav");
             SfxCmd.Play("res://Tidus/sfx/Tidus/limit_start.wav");
@@ -117,7 +117,7 @@ public class SliceAndDice() : TidusCard(
             SfxCmd.Play("res://Tidus/sfx/Tidus/swing_1.wav");
             tidus.DashTo(ownerCreature, target, 0.05f, -250, false, animationString);
             tidus.PlayVfxOnTarget(target, "res://Tidus/scenes/vfx.tscn", "slice_2");
-            await DamageCmd.Attack(totalDamage).Targeting(target).FromCard(this,play).WithValueProp(ValueProp.Move)
+            await DamageCmd.Attack(totalDamage).FromCard(this,play).Targeting(target).WithValueProp(ValueProp.Move)
                 .WithHitFx(null, "res://Tidus/sfx/Tidus/slice_and_dice_last_hit.wav")
                 .Execute(choiceContext);
             await tidus.Delay(ownerCreature, 0.25f);
@@ -125,10 +125,8 @@ public class SliceAndDice() : TidusCard(
             return;
         }
 
-        await CommonActions.CardAttack(this, target)
-            .WithHitFx(
-                null,
-                "res://Tidus/sfx/Tidus/slash_2.wav")
+        await DamageCmd.Attack(totalDamage).FromCard(this,play).Targeting(target).WithValueProp(ValueProp.Move)
+            .WithHitFx(null, "res://Tidus/sfx/Tidus/slice_and_dice_last_hit.wav")
             .Execute(choiceContext);
     }
 

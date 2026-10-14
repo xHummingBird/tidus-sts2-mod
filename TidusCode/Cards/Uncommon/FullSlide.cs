@@ -31,19 +31,21 @@ public class FullSlide() : TidusCard(3, CardType.Attack, CardRarity.Uncommon, Ta
         {
             AudioHelper.PlayRandomAttackHard();
             await tidus.DashTo(ownerCreature, play.Target, distance: 300f, durationSeconds: 0.2f);
-            tidus.DashTo(ownerCreature, play.Target, distance: -200f, durationSeconds: 0.2f, overrideAnim: "full_slide");
-            await tidus.Delay(ownerCreature, 0.15f);
+            tidus.PlayAnimation(ownerCreature, "full_slide");
+            await tidus.Delay(ownerCreature, 0.05f);
             SfxCmd.Play("res://Tidus/sfx/swing_2.wav");
             SfxCmd.Play("res://Tidus/sfx/Tidus/slash_2.wav");
-            await tidus.Delay(ownerCreature, 0.05f);
+            await tidus.DashTo(ownerCreature, play.Target, distance: -200f, durationSeconds: 0.05f, overrideAnim: "full_slide");
             TidusExtensions.CombatHelpers.TidusFakeHit(ownerCreature, play.Target, hitVfx: "hit");
             await tidus.Delay(ownerCreature, 0.3f);
             SfxCmd.Play("res://Tidus/sfx/swing_2.wav");
             SfxCmd.Play("res://Tidus/sfx/Tidus/slash_1.wav");
-            await tidus.Delay(ownerCreature, 0.05f);
+            await tidus.DashTo(ownerCreature, play.Target, distance: -300f, durationSeconds: 0.05f, overrideAnim: "full_slide");
             TidusExtensions.CombatHelpers.TidusFakeHit(ownerCreature, play.Target, hitVfx: "hit");
             await tidus.Delay(ownerCreature, 0.3f);
             AudioHelper.PlayRandomLastHit();
+            await tidus.Delay(ownerCreature, 0.2f);
+            TidusExtensions.CombatHelpers.TidusFakeHit(ownerCreature, play.Target, hitVfx: "hit");
             await CommonActions.CardAttack(this, play.Target)
                 .WithHitFx(null, "res://Tidus/sfx/Tidus/slash_2.wav")
                 .Execute(choiceContext);

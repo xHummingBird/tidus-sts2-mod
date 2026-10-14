@@ -17,7 +17,7 @@
   "TIDUS-TRI_STEEL.description": "Whenever you discard a card during your turn, gain 3 [gold]Vigor[/gold].",
   "TIDUS-TRI_STEEL.flavor": "Jack of all trades, master of none.",
   "TIDUS-TRI_STEEL.title": "Tri-Steel",
-  "TIDUS-FORCE_SABER.description": "At the start of combat, gain {HastePower:diff(1)}.",
+  "TIDUS-FORCE_SABER.description": "At the start of combat, gain 1 [gold]Haste[/gold].",
   "TIDUS-FORCE_SABER.flavor": "A guardian's blade",
   "TIDUS-FORCE_SABER.title": "Force Saber",
   "TIDUS-OFFICIAL_BALL.description": "At the start of combat, add 2 random [gold]Blitz[/gold] cards to your hand.",

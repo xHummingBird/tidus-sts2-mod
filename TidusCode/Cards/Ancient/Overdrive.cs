@@ -15,8 +15,9 @@ public class Overdrive() : TidusCard(0, CardType.Skill,
 {
     protected override bool ShouldGlowGoldInternal => Owner.HasPower<OverdriveReadyPower>();
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+    [
+        CardKeyword.Exhaust
     ];
 
     protected override async Task OnPlay(

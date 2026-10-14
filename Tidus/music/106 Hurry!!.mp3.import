@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwwcc03q2gdt2"
+path="res://.godot/imported/106 Hurry!!.mp3-bed6db691bf19041dad160f323b33237.mp3str"
+
+[deps]
+
+source_file="res://Tidus/music/106 Hurry!!.mp3"
+dest_files=["res://.godot/imported/106 Hurry!!.mp3-bed6db691bf19041dad160f323b33237.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

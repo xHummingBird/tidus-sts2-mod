@@ -30,7 +30,7 @@ public sealed class ExtractSpeed() : TidusCard(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<DelayPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
+        await PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, 1, Owner.Creature, this);
         decimal totalDelay = CombatState?.Enemies
                                  .Where(enemy => enemy.IsAlive)
                                  .Sum(enemy => enemy.GetPowerAmount<DelayPower>())
