@@ -1,5 +1,14 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using Godot;
+using HarmonyLib;
+using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Extensions;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 
 namespace Tidus.TidusCode.Extensions;
 
@@ -46,5 +55,34 @@ public class TidusExtensions
             if (target.Monster?.HasHurtSfx == true)
                 SfxCmd.Play(target.Monster.HurtSfx);
         }
+    }
+}
+
+[HarmonyPatch(
+    typeof(CardSelectCmd),
+    nameof(CardSelectCmd.FromHandForDiscard))]
+public static class BlitzDiscardGlowPatch
+{
+    [HarmonyPrefix]
+    public static bool Prefix(
+        PlayerChoiceContext context,
+        Player player,
+        CardSelectorPrefs prefs,
+        Func<CardModel, bool>? filter,
+        AbstractModel source,
+        ref Task<IEnumerable<CardModel>> __result)
+    {
+        prefs.ShouldGlowGold = c =>
+            c.IsSlyThisTurn ||
+            c.Keywords.Contains(TidusEnums.Blitz);
+
+        __result = CardSelectCmd.FromHand(
+            context,
+            player,
+            prefs,
+            filter,
+            source);
+
+        return false;
     }
 }

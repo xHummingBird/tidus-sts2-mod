@@ -12,7 +12,7 @@ using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Uncommon;
 
-public class SpiralCut() : TidusCard(1, CardType.Attack,
+public class SpiralCut() : TidusCard(2, CardType.Attack,
     CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();

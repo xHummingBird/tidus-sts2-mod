@@ -90,11 +90,6 @@ public abstract class OverdriveRelicBase : TidusRelic
         BattleTheme.PlayVictoryFanfare(
             RunManager.Instance.NetService.NetId,
             isBoss);
-    
-        if (!isBoss)
-            return;
-    
-        await Task.Delay(4000);
     }
     
     public override async Task AfterSideTurnStartLate(

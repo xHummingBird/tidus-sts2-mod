@@ -20,6 +20,8 @@ public class Substitution() : TidusCard(
     TargetType.Self),
     IBlitz
 {
+    protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<DexterityPower>(2),

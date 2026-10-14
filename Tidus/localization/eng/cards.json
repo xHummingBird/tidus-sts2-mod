@@ -178,7 +178,7 @@
   "TIDUS-VENOM_TACKLE.description": "Enemy deals {VenomTacklePower:diff()} less damage with Attacks this turn.",
   "TIDUS-VENOM_TACKLE.title": "Venom Tackle",
 
-  "TIDUS-TACTICIAN.description": "Gain {Overdrive:diff()} [red]Overdrive[/red].\nNext turn, draw 2 cards.",
+  "TIDUS-TACTICIAN.description": "Gain {Overdrive:diff()} [red]Overdrive[/red].\nNext turn, gain {Energy:energyIcons()} and gain {HastePower:diff()} [gold]Haste[/gold].",
   "TIDUS-TACTICIAN.title": "Tactician",
 
   "TIDUS-BREAK_DAMAGE_LIMIT.description": "Deal {BreakDamageLimitPower:diff()}% more damage to enemies with [gold]Delay[/gold] while you have [gold]Haste[/gold].",

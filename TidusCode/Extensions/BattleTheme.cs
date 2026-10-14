@@ -117,46 +117,59 @@ public static class BattleTheme
     // VANILLA MUSIC CONTROL
     // ============================================================
 
-    private static void MuteVanillaMusic()
+    public static void StopVanillaMusicOnly()
     {
-        if (_vanillaMusicMuted)
+        var controller = NRunMusicController.Instance;
+
+        if (controller == null)
             return;
 
-        if (!FmodAudio.BusExists(MusicBus))
-        {
-            GD.PrintErr(
-                $"FMOD music bus not found: {MusicBus}");
+        var proxy = AccessTools.Field(
+                typeof(NRunMusicController),
+                "_proxy")
+            .GetValue(controller) as Node;
 
-            return;
-        }
-
-        _savedMusicBusVolume =
-            FmodAudio.GetBusVolume(MusicBus);
-
-        ForceMuteMusicBus();
-
-        _vanillaMusicMuted = true;
-
-        GD.Print(
-            $"Muted STS2 music bus. Previous volume: " +
-            $"{_savedMusicBusVolume}");
+        proxy?.Call("stop_music");
     }
-
-    public static void ForceMuteMusicBus()
+    
+    public static void ResumeVanillaMusic()
     {
-        if (!FmodAudio.BusExists(MusicBus))
+        var controller = NRunMusicController.Instance;
+
+        if (controller == null)
             return;
 
-        FmodAudio.SetBusVolume(
-            MusicBus,
-            0f);
+        var proxy = AccessTools.Field(
+                typeof(NRunMusicController),
+                "_proxy")
+            .GetValue(controller) as Node;
+
+        string? currentTrack =
+            AccessTools.Field(
+                    typeof(NRunMusicController),
+                    "_currentTrack")
+                .GetValue(controller) as string;
+
+        proxy?.Call("stop_music");
+
+        if (!string.IsNullOrEmpty(currentTrack))
+        {
+            proxy.Call(
+                "update_music",
+                currentTrack);
+
+            proxy.Call(
+                "update_global_parameter",
+                "Progress",
+                7);
+        }
     }
 
     public static void RestoreVanillaMusic()
     {
         if (!_vanillaMusicMuted)
             return;
-
+    
         if (FmodAudio.BusExists(MusicBus))
         {
             /*
@@ -168,16 +181,16 @@ public static class BattleTheme
                     .SettingsSave?
                     .VolumeBgm
                 ?? _savedMusicBusVolume;
-
+    
             FmodAudio.SetBusVolume(
                 MusicBus,
                 currentBgmVolume);
-
+    
             GD.Print(
                 $"Restored STS2 music bus to " +
                 $"{currentBgmVolume}");
         }
-
+    
         _vanillaMusicMuted = false;
     }
 
@@ -251,16 +264,17 @@ public static class BattleTheme
         StopFanfare();
         StopGameOverMusic();
 
-        MuteVanillaMusic();
+        //MuteVanillaMusic();
+        StopVanillaMusicOnly();
 
         string[] pool =
             GetPool(actIndex, roomType);
 
-        if (pool.Length == 0)
-        {
-            RestoreVanillaMusic();
-            return;
-        }
+        // if (pool.Length == 0)
+        // {
+        //     RestoreVanillaMusic();
+        //     return;
+        // }
 
         string path =
             pool[Random.Shared.Next(pool.Length)];
@@ -273,7 +287,7 @@ public static class BattleTheme
             GD.PrintErr(
                 $"Failed to load Tidus battle music: {path}");
 
-            RestoreVanillaMusic();
+            //RestoreVanillaMusic();
             return;
         }
 
@@ -327,7 +341,7 @@ public static class BattleTheme
         {
             _battlePlayer = null;
             player.QueueFree();
-            RestoreVanillaMusic();
+            //RestoreVanillaMusic();
             return;
         }
 
@@ -362,7 +376,8 @@ public static class BattleTheme
         /*
          * Keep vanilla music muted through the victory sequence.
          */
-        MuteVanillaMusic();
+        //MuteVanillaMusic();
+        StopVanillaMusicOnly();
 
         string path =
             isBoss
@@ -438,7 +453,8 @@ public static class BattleTheme
         StopFanfare();
         StopGameOverMusic();
 
-        MuteVanillaMusic();
+        //MuteVanillaMusic();
+        StopVanillaMusicOnly();
 
         AudioStream? stream =
             GD.Load<AudioStream>(
@@ -510,7 +526,8 @@ public static class BattleTheme
         StopFanfare();
         StopGameOverMusic();
 
-        RestoreVanillaMusic();
+        //RestoreVanillaMusic();
+        ResumeVanillaMusic();
 
         GD.Print(
             "Stopped all Tidus music");
@@ -644,6 +661,6 @@ public static class KeepBgmMutedPatch
         if (!BattleTheme.IsBattleThemeActive)
             return;
 
-        BattleTheme.ForceMuteMusicBus();
+        // BattleTheme.ForceMuteMusicBus();
     }
 }
