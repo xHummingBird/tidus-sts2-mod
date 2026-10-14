@@ -17,7 +17,7 @@ public class Tactician() : TidusCard(1, CardType.Skill,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new DynamicVar("Overdrive", 10)
+        new DynamicVar("Overdrive", 12)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -34,6 +34,6 @@ public class Tactician() : TidusCard(1, CardType.Skill,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Overdrive"].UpgradeValueBy(5m);
+        DynamicVars["Overdrive"].UpgradeValueBy(6m);
     }
 }

@@ -36,11 +36,11 @@ public class DashAttack() : TidusCard(1, CardType.Attack,
         {
             AudioHelper.PlayRandomAttackHard();
             await tidus.DashTo(ownerCreature, leftMostEnemy, distance: 300f, durationSeconds: 0.20F);
-            tidus.DashTo(ownerCreature, rightMostEnemy, distance: -200f, durationSeconds: 0.15F, overrideAnim: "dash_attack");
-            await tidus.Delay(ownerCreature, 0.1f);
+            tidus.PlayAnimation(ownerCreature, "dash_attack");
+            await tidus.Delay(ownerCreature, 0.05f);
             SfxCmd.Play("res://Tidus/sfx/swing_2.wav");
             SfxCmd.Play("res://Tidus/sfx/Tidus/slash_2.wav");
-            await tidus.Delay(ownerCreature, 0.05f);
+            tidus.DashTo(ownerCreature, rightMostEnemy, distance: -200f, durationSeconds: 0.05F, overrideAnim: "dash_attack");
             foreach (var enemy in enemies)
             {
                 tidus.PlayVfxOnTarget(
@@ -52,7 +52,7 @@ public class DashAttack() : TidusCard(1, CardType.Attack,
             await CommonActions.CardAttack(this, play.Target)
                 .WithHitFx(null)
                 .Execute(choiceContext);
-            await tidus.Delay(ownerCreature, 0.1f);
+            await tidus.Delay(ownerCreature, 0.15f);
             await tidus.Retreat(ownerCreature, duration: 0.2F);
         }
         else  await CommonActions.CardAttack(this, play.Target)

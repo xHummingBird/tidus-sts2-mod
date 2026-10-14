@@ -18,7 +18,7 @@ public class Striker() : TidusCard(
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<StrikerPower>(1)
+        new PowerVar<StrikerPower>(50)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

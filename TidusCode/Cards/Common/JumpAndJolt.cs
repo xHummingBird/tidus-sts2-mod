@@ -18,7 +18,7 @@ using Tidus.TidusCode.Powers;
 namespace Tidus.TidusCode.Cards.Common;
 
 public class JumpAndJolt() : TidusCard(
-    1,
+    2,
     CardType.Attack,
     CardRarity.Common,
     TargetType.AnyEnemy),

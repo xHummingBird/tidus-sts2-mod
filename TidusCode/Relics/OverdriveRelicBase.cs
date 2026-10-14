@@ -23,10 +23,11 @@ public abstract class OverdriveRelicBase : TidusRelic
 {
     [SavedProperty]
     public int StoredOverdrive { get; internal set; }
+    
+    [SavedProperty]
+    public bool TriggerOverkill { get; internal set; }
 
     public int BlitzUsedThisCombat { get; private set; }
-    
-    private bool _triggerOverkill;
 
     public virtual int MaxOverdrive => 100;
     
@@ -45,7 +46,7 @@ public abstract class OverdriveRelicBase : TidusRelic
     public override Task BeforeCombatStart()
     {
         Status = RelicStatus.Normal;
-        _triggerOverkill = false;
+        TriggerOverkill = false;
         OverdriveManager.ResetOverdrive(Owner);
         
         if (Owner.GetRelic<Apocalypse>() != null)
@@ -300,7 +301,7 @@ public abstract class OverdriveRelicBase : TidusRelic
         if (!overkill)
             return;
 
-        _triggerOverkill = true;
+        TriggerOverkill = true;
 
         if (dealer?.Player?.Character is Character.Tidus tidus)
         {
@@ -386,7 +387,7 @@ public abstract class OverdriveRelicBase : TidusRelic
         if (!room.RoomType.IsCombatRoom())
             return false;
 
-        if (!_triggerOverkill)
+        if (!TriggerOverkill)
             return false;
 
         rewards.Add(
@@ -408,7 +409,7 @@ public abstract class OverdriveRelicBase : TidusRelic
     {
         if (player != Owner)
             return false;
-        if (!_triggerOverkill)
+        if (!TriggerOverkill)
             return false;
 /*
  * Only modify encounter card rewards.

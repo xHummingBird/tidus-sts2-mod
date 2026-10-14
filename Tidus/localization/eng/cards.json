@@ -11,7 +11,7 @@
   "TIDUS-GUARD.description": "Gain {Block:diff()} [gold]Block[/gold]. \nDiscard 1 card.",
   "TIDUS-GUARD.title": "Guard",
 
-  "TIDUS-SLICE_AND_DICE.description": "Deal {Damage:diff()} damage 4 times.\n{BlitzIcon}: Deal {Damage:diff()} damage 2 times.",
+  "TIDUS-SLICE_AND_DICE.description": "Deal {Damage:diff()} damage.\n{BlitzIcon}: Deal {Damage:diff()} damage.",
   "TIDUS-SLICE_AND_DICE.title": "Slice & Dice",
 
   "TIDUS-THROW.description": "Deal {Damage:diff()} damage.\nPut a card from your [gold]Discard Pile[/gold] on top of your [gold]Draw Pile[/gold].",
@@ -154,7 +154,7 @@
   "TIDUS-TACTICAL_PASS.description": "Gain {Block:diff()} [gold]Block[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nDiscard 1 card.",
   "TIDUS-TACTICAL_PASS.title": "Tactical Pass",
 
-  "TIDUS-PRESSURE_DEFENSE.description": "Gain {Block:diff()} [gold]Block[/gold].\nApply {DelayPower:diff()} [gold]Delay[/gold].",
+  "TIDUS-PRESSURE_DEFENSE.description": "Gain {Block:diff()} [gold]Block[/gold].\nApply 2 [gold]Delay[/gold].",
   "TIDUS-PRESSURE_DEFENSE.title": "Pressure Defense",
 
   "TIDUS-INTERCEPT.description": "Gain {Block:diff()} [gold]Block[/gold].\nApply 1 [gold]Delay[/gold].\nIf you have [gold]Haste[/gold], apply an additional {DelayPower:diff()} [gold]Delay[/gold].",
@@ -178,7 +178,7 @@
   "TIDUS-VENOM_TACKLE.description": "Enemy deals {VenomTacklePower:diff()} less damage with Attacks this turn.",
   "TIDUS-VENOM_TACKLE.title": "Venom Tackle",
 
-  "TIDUS-TACTICIAN.description": "Gain {Overdrive:diff()} [red]Overdrive[/red].\nNext turn, draw {Cards:diff()} {Cards:plural:card|cards}.",
+  "TIDUS-TACTICIAN.description": "Gain {Overdrive:diff()} [red]Overdrive[/red].\nNext turn, draw 2 cards.",
   "TIDUS-TACTICIAN.title": "Tactician",
 
   "TIDUS-BREAK_DAMAGE_LIMIT.description": "Deal {BreakDamageLimitPower:diff()}% more damage to enemies with [gold]Delay[/gold] while you have [gold]Haste[/gold].",

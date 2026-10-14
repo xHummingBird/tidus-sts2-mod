@@ -34,9 +34,9 @@ public class SpiralCut() : TidusCard(1, CardType.Attack,
         {
             tidus.PlayAnimation(ownerCreature, "overdrive_cast");
             SfxCmd.Play("res://Tidus/sfx/Tidus/limit_thunder_2.wav");
-            SfxCmd.Play("res://Tidus/sfx/Tidus/limit_start.wav");
             await tidus.Delay(ownerCreature, 0.6f);
             tidus.PlayAnimation(ownerCreature, "spiral_cut");
+            SfxCmd.Play("res://Tidus/sfx/Tidus/limit_start.wav");
             await tidus.Delay(ownerCreature, 0.1f);
             await tidus.DashTo(ownerCreature, play.Target, distance: 300f, durationSeconds: 0.20F, overrideAnim: null);
             await tidus.Delay(ownerCreature, 0.2f);

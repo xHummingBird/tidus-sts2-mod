@@ -88,19 +88,11 @@ public class Swordplay() : TidusCard(
                 distance: 300f,
                 durationSeconds: 0.20f);
 
-            tidus.DashTo(
-                ownerCreature,
-                target,
-                distance: -200f,
-                durationSeconds: 0.15f,
-                overrideAnim: "dash_attack");
-
-            await tidus.Delay(ownerCreature, 0.1f);
-
+            tidus.PlayAnimation(ownerCreature, "dash_attack");
+            await tidus.Delay(ownerCreature, 0.05f);
             SfxCmd.Play("res://Tidus/sfx/swing_2.wav");
             SfxCmd.Play("res://Tidus/sfx/Tidus/slash_2.wav");
-
-            await tidus.Delay(ownerCreature, 0.05f);
+            tidus.DashTo(ownerCreature, target, distance: -200f, durationSeconds: 0.05F, overrideAnim: "dash_attack");
 
             tidus.PlayVfxOnTarget(
                 target,
@@ -111,7 +103,7 @@ public class Swordplay() : TidusCard(
                 .WithHitFx(null)
                 .Execute(choiceContext);
 
-            await tidus.Delay(ownerCreature, 0.1f);
+            await tidus.Delay(ownerCreature, 0.15f);
 
             await tidus.Retreat(
                 ownerCreature,
