@@ -22,6 +22,8 @@ public class QuickHit() : TidusCard(
     CardRarity.Rare,
     TargetType.AnyEnemy)
 {
+    protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(10m, ValueProp.Move),
@@ -61,7 +63,7 @@ public class QuickHit() : TidusCard(
                     "res://Tidus/sfx/Tidus/slash_3.wav")
                 .Execute(choiceContext);
         if (!Owner.HasPower<HastePower>())
-            await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
+            await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, 2, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

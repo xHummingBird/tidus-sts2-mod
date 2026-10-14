@@ -71,11 +71,15 @@
   "TIDUS-VENOM_TACKLE_POWER.smartDescription": "Attacks deal [blue]{Amount}[/blue] less damage this turn.",
   "TIDUS-VENOM_TACKLE_POWER.title": "Venom Tackle",
 
-  "TIDUS-AMPLIFY_DELAY_POWER.description": "[gold]Delay[/gold] causes enemies to deal [blue]50%[/blue] less damage instead of [blue]25%[/blue].",
-  "TIDUS-AMPLIFY_DELAY_POWER.smartDescription": "[gold]Delay[/gold] causes enemies to deal [blue]50%[/blue] less damage instead of [blue]25%[/blue] for [blue]{Amount}[/blue] {Amount:plural:turn|turns}.",
+  "TIDUS-AMPLIFY_DELAY_POWER.description": "Double damage reduction from [gold]Delay[/gold] and damage taken from [gold]Hasted[/gold] Creatures.",
+  "TIDUS-AMPLIFY_DELAY_POWER.smartDescription": "Double damage reduction from [gold]Delay[/gold] and damage taken from [gold]Hasted[/gold] Creatures for [blue]{Amount}[/blue] {Amount:plural:turn|turns}.",
   "TIDUS-AMPLIFY_DELAY_POWER.title": "Amplify Delay",
 
   "TIDUS-EVADE_AND_COUNTER_POWER.description": "Blocked damage is reflected to your attacker.",
   "TIDUS-EVADE_AND_COUNTER_POWER.smartDescription": "Blocked damage is reflected to your attacker for [blue]{Amount}[/blue] {Amount:plural:turn|turns}.",
-  "TIDUS-EVADE_AND_COUNTER_POWER.title": "Evade & Counter"
+  "TIDUS-EVADE_AND_COUNTER_POWER.title": "Evade & Counter",
+
+  "TIDUS-HASTE_NEXT_TURN_POWER.description": "Gain [gold]Haste[/gold] at the start of next turn.",
+  "TIDUS-HASTE_NEXT_TURN_POWER.smartDescription": "Gain [blue]{Amount}[/blue] [gold]Haste[/gold] at the start of next turn.",
+  "TIDUS-HASTE_NEXT_TURN_POWER.title": "Haste Next Turn"
 }

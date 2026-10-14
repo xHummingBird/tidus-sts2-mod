@@ -18,7 +18,7 @@ public class DrainTackle() : TidusCard(1, CardType.Attack,
         new DamageVar(11m, ValueProp.Move),
         new HealVar(2)
     ];
-
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         var ownerCreature = Owner?.Creature;

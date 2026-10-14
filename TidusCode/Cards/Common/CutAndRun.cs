@@ -20,6 +20,8 @@ public class CutAndRun() : TidusCard(
     TargetType.AllEnemies),
     IBlitz
 {
+    protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(7m, ValueProp.Move)

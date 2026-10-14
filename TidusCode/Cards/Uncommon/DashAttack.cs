@@ -1,5 +1,6 @@
 ﻿using BaseLib.Extensions;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -14,10 +15,19 @@ namespace Tidus.TidusCode.Cards.Uncommon;
 public class DashAttack() : TidusCard(1, CardType.Attack,
     CardRarity.Uncommon, TargetType.AllEnemies)
 {
+    private int PlayCountThisTurn =>
+        CombatManager.Instance.History.CardPlaysFinished
+            .Count(e =>
+                e.HappenedThisTurn(base.CombatState) &&
+                e.CardPlay.Player == base.Owner);
+    
+    protected override bool ShouldGlowGoldInternal => PlayCountThisTurn == 0;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5m, ValueProp.Move),
-        new PowerVar<DelayPower>(1m)
+        new DamageVar(7m, ValueProp.Move),
+        new PowerVar<DelayPower>(1m),
+        new PowerVar<HastePower>(1m)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -59,13 +69,16 @@ public class DashAttack() : TidusCard(1, CardType.Attack,
             .WithHitFx(null, "res://Tidus/sfx/Tidus/slash_1.wav")
             .Execute(choiceContext);
         await PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, 1, Owner.Creature, this);
-        if (Owner.HasPower<HastePower>())
-            await PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, DynamicVars["DelayPower"].BaseValue, Owner.Creature, this);
+        if (PlayCountThisTurn == 0)
+        {
+            await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].BaseValue, Owner.Creature, this);
+        }
+        
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2m);
-        DynamicVars["DelayPower"].UpgradeValueBy(1m);
+        DynamicVars["HastePower"].UpgradeValueBy(1m);
     }
 }

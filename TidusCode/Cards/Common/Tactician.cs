@@ -17,12 +17,14 @@ public class Tactician() : TidusCard(1, CardType.Skill,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new DynamicVar("Overdrive", 8)
+        new DynamicVar("Overdrive", 8),
+        new PowerVar<HastePower>(1m)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<OverdriveReadyPower>()
+        HoverTipFactory.FromPower<OverdriveReadyPower>(),
+        HoverTipFactory.FromPower<HastePower>()
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -30,10 +32,12 @@ public class Tactician() : TidusCard(1, CardType.Skill,
         AudioHelper.PlayRandomDefend();
         OverdriveManager.GainOverdrive(Owner, DynamicVars["Overdrive"].IntValue);
         await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature, 2, Owner.Creature, this);
+        await PowerCmd.Apply<HasteNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars["Overdrive"].UpgradeValueBy(4m);
+        DynamicVars["HastePower"].UpgradeValueBy(1m);
     }
 }

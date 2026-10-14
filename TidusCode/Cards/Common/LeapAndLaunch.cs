@@ -22,6 +22,7 @@ public class LeapAndLaunch() : TidusCard(
     TargetType.AnyEnemy),
     IBlitz
 {
+    protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(8m, ValueProp.Move),

@@ -17,6 +17,7 @@ public sealed class ExtractSpeed() : TidusCard(
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
+        CardKeyword.Innate,
         CardKeyword.Exhaust
     ];
 
@@ -46,6 +47,6 @@ public sealed class ExtractSpeed() : TidusCard(
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Innate);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

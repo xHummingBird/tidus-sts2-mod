@@ -23,6 +23,8 @@ public class ClutchShot() : TidusCard(
     TargetType.AnyEnemy),
     IBlitz
 {
+    protected override bool ShouldGlowGoldInternal => (Owner.Creature.CurrentHp * 2 <= Owner.Creature.MaxHp) || Owner.HasPower<HastePower>();
+    
     private const string Increase = "Increase";
 
     private const int BaseDamage = 13;
@@ -131,10 +133,8 @@ public class ClutchShot() : TidusCard(
 
         CenterCardCinematic.Start(
             RunManager.Instance.NetService.NetId);
-
-        try
-        {
-            if (ownerCreature != null &&
+        
+        if (ownerCreature != null &&
                 Owner?.Character is Character.Tidus tidus)
             {
                 AudioHelper.PlayRandomPhrase();
@@ -174,25 +174,20 @@ public class ClutchShot() : TidusCard(
                 await tidus.Delay(
                     ownerCreature,
                     0.15f);
-
-                return;
             }
-
-            await DamageCmd.Attack(
-                    DynamicVars.Damage.BaseValue)
-                .FromCard(this, play)
-                .WithHitFx(
-                    null,
-                    "res://Tidus/sfx/hit_2.wav")
-                .Targeting(target)
-                .Execute(choiceContext);
-        }
-        finally
-        {
+            else
+                await DamageCmd.Attack(
+                        DynamicVars.Damage.BaseValue)
+                    .FromCard(this, play)
+                    .WithHitFx(
+                        null,
+                        "res://Tidus/sfx/hit_2.wav")
+                    .Targeting(target)
+                    .Execute(choiceContext);
             CenterCardCinematic.End(
-                RunManager.Instance.NetService.NetId);
+                                    RunManager.Instance.NetService.NetId);
         }
-    }
+    
 
     private void BuffFromBlitz(
         int extraDamage)

@@ -12,7 +12,7 @@ using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Rare;
 
-public class Hastega() : TidusCard(1, CardType.Skill,
+public class Hastega() : TidusCard(0, CardType.Skill,
     CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 
@@ -35,14 +35,13 @@ public class Hastega() : TidusCard(1, CardType.Skill,
         AudioHelper.PlayRandomDefend();
         var powerAmount = Owner.Creature.GetPowerAmount<HastePower>();
         if (powerAmount > 1)
-        await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, powerAmount, Owner.Creature, this);
-
+            await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, powerAmount, Owner.Creature, this);
         else
             await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

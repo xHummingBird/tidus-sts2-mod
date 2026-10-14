@@ -51,6 +51,7 @@ public class Haymaker() : TidusCard(
             await tidus.Delay(ownerCreature, 0.15f);
             await tidus.Retreat(ownerCreature, duration: 0.2f);
             await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].BaseValue, Owner.Creature, this);
+            CenterCardCinematic.End(RunManager.Instance.NetService.NetId);
             return;
         }
 

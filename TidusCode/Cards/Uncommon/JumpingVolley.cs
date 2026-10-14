@@ -26,6 +26,7 @@ public class JumpingVolley() : TidusCard(
     TargetType.AnyEnemy),
     IBlitz
 {
+    protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(15m, ValueProp.Move)
@@ -94,9 +95,8 @@ public class JumpingVolley() : TidusCard(
         CenterCardCinematic.Start(
             RunManager.Instance.NetService.NetId);
 
-        try
-        {
-            if (Owner.Character is Character.Tidus tidus)
+        
+        if (Owner.Character is Character.Tidus tidus)
             {
                 AudioHelper.PlayRandomPhrase();
 
@@ -136,24 +136,19 @@ public class JumpingVolley() : TidusCard(
                 if (!ownerCreature.HasPower<HastePower>())
                     await tidus.Delay(ownerCreature, 0.15f);
 
-                return;
+                
             }
-
-            await DamageCmd.Attack(
-                    DynamicVars.Damage.BaseValue)
-                .FromCard(this, play)
-                .WithHitFx(
+            else
+                await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).WithHitFx(
                     null,
                     "res://Tidus/sfx/hit_2.wav")
                 .Targeting(target)
                 .Execute(choiceContext);
-        }
-        finally
-        {
+        
             CenterCardCinematic.End(
                 RunManager.Instance.NetService.NetId);
         }
-    }
+    
 
     protected override void OnUpgrade()
     {

@@ -22,6 +22,8 @@ public class SphereShot() : TidusCard(
     TargetType.AnyEnemy),
     IBlitz
 {
+    protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
+    
     private const string MinimumDamage = "MinimumDamage";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

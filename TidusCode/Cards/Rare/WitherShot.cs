@@ -23,6 +23,8 @@ public class WitherShot() : TidusCard(
     TargetType.AnyEnemy),
     IBlitz
 {
+    protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(7m, ValueProp.Move),
@@ -78,7 +80,7 @@ public class WitherShot() : TidusCard(
         PlayerChoiceContext choiceContext,
         Creature? target)
     {
-        PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, DynamicVars["DelayPower"].BaseValue,
+        await PowerCmd.Apply<DelayPower>(choiceContext, CombatState.HittableEnemies, DynamicVars["DelayPower"].BaseValue,
             Owner.Creature, this);
     }
 

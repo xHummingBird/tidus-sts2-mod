@@ -8,10 +8,10 @@ using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
 using Tidus.TidusCode.Powers;
 
-namespace Tidus.TidusCode.Cards.Uncommon;
+namespace Tidus.TidusCode.Cards.Common;
 
 public class Daredevil() : TidusCard(1, CardType.Skill,
-    CardRarity.Uncommon, TargetType.Self)
+    CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [

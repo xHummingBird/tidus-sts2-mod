@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
+using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Common;
 
@@ -14,7 +15,8 @@ public class AceSpirit() : TidusCard(1, CardType.Skill,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 
     [
-        new EnergyVar(2)
+        new EnergyVar(2),
+        new PowerVar<HastePower>(1)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -25,6 +27,7 @@ public class AceSpirit() : TidusCard(1, CardType.Skill,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await PlayerCmd.GainEnergy(2, Owner);
+        await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

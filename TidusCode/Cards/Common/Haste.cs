@@ -11,7 +11,7 @@ using Tidus.TidusCode.Powers;
 
 namespace Tidus.TidusCode.Cards.Common;
 
-public class Haste() : TidusCard(0, CardType.Skill,
+public class Haste() : TidusCard(1, CardType.Skill,
     CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => 
@@ -37,6 +37,6 @@ public class Haste() : TidusCard(0, CardType.Skill,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["HastePower"].UpgradeValueBy(1m);
+        EnergyCost.UpgradeBy(-1);
     }
 }

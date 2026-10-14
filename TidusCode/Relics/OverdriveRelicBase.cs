@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Cards.Ancient;
 using Tidus.TidusCode.Cards.Rare;
+using Tidus.TidusCode.Cards.Uncommon;
 using Tidus.TidusCode.Extensions;
 using Tidus.TidusCode.Mechanics;
 using Tidus.TidusCode.Powers;
@@ -118,8 +119,8 @@ public abstract class OverdriveRelicBase : TidusRelic
         amount = ModifyTurnStartOverdriveGain(
             amount);
         
-        if (Owner.Creature.CurrentHp * 2 <= Owner.Creature.MaxHp)
-            GainOverdrive(amount*2);
+        if (Owner.Creature.CurrentHp * 4 <= Owner.Creature.MaxHp)
+            GainOverdrive(amount * 2);
         
         else GainOverdrive(amount);
         

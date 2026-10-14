@@ -1,20 +1,17 @@
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using Tidus.TidusCode.Extensions;
-using Tidus.TidusCode.Mechanics;
 using Tidus.TidusCode.Powers;
 
-namespace Tidus.TidusCode.Cards.Uncommon;
+namespace Tidus.TidusCode.Cards.Rare;
 
 public class Piercing() : TidusCard(
-    1,
+    0,
     CardType.Skill,
-    CardRarity.Uncommon,
-    TargetType.AnyEnemy)
+    CardRarity.Rare,
+    TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -32,7 +29,7 @@ public class Piercing() : TidusCard(
     {
         await PowerCmd.Apply<AmplifyDelayPower>(
             choiceContext,
-            play.Target,
+            CombatState.HittableEnemies,
             DynamicVars["AmplifyDelayPower"].BaseValue,
             Owner.Creature,
             this);

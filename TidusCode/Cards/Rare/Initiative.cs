@@ -19,7 +19,7 @@ public class Initiative() : TidusCard(
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new EnergyVar(1),
-        new CardsVar(1),
+        new PowerVar<HastePower>(1),
         new DynamicVar("Overdrive", 10)
     ];
 
@@ -30,7 +30,8 @@ public class Initiative() : TidusCard(
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<OverdriveReadyPower>()
+        HoverTipFactory.FromPower<OverdriveReadyPower>(),
+        HoverTipFactory.FromPower<HastePower>()
     ];
 
     protected override async Task OnPlay(
@@ -39,6 +40,8 @@ public class Initiative() : TidusCard(
     {
         await PlayerCmd.GainEnergy(
             DynamicVars.Energy.IntValue, Owner);
+        
+        await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].IntValue, Owner.Creature, this);
 
         OverdriveManager.GainOverdrive(
             Owner,
@@ -53,6 +56,6 @@ public class Initiative() : TidusCard(
     protected override void OnUpgrade()
     {
         DynamicVars["Overdrive"].UpgradeValueBy(5);
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars["HastePower"].UpgradeValueBy(1);
     }
 }

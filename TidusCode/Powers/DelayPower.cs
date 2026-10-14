@@ -68,10 +68,19 @@ public sealed class DelayPower : TidusPower
 
             decimal breakDamageLimit =
                 dealer.GetPowerAmount<BreakDamageLimitPower>();
-            
-            damageIncrease += breakDamageLimit / 100m;
-            
-            multiplier *= damageIncrease;
+
+            if (target.HasPower<AmplifyDelayPower>())
+            {
+                damageIncrease = 1.5m;
+            }
+
+            decimal totalBonus =
+                (damageIncrease - 1m)
+                + (breakDamageLimit / 100m);
+
+            totalBonus *= 2m;
+
+            multiplier *= (1m + totalBonus);
         }
 
         return multiplier;

@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using Tidus.TidusCode.Cards.Rare;
+using Tidus.TidusCode.Cards.Uncommon;
 
 namespace Tidus.TidusCode.Powers;
 
@@ -19,7 +20,7 @@ public class HastePower : TidusPower
     {
         if (side != Owner.Side)
             return;
-
+        
         await PowerCmd.Decrement(this);
         var ownerCreature = Owner;
         var tidus = Owner?.Player.Character as Character.Tidus;
