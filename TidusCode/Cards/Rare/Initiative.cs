@@ -46,11 +46,6 @@ public class Initiative() : TidusCard(
         OverdriveManager.GainOverdrive(
             Owner,
             DynamicVars["Overdrive"].IntValue);
-
-        await CardPileCmd.Draw(
-            choiceContext,
-            DynamicVars.Cards.IntValue,
-            Owner);
     }
 
     protected override void OnUpgrade()
