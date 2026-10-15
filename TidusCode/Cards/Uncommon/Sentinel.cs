@@ -27,8 +27,7 @@ public class Sentinel() : TidusCard(
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromKeyword(
-            CardKeyword.Retain)
+        HoverTipFactory.FromKeyword(CardKeyword.Retain)
     ];
 
     protected override async Task OnPlay(

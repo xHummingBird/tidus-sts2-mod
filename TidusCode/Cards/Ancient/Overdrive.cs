@@ -17,6 +17,7 @@ public class Overdrive() : TidusCard(0, CardType.Skill,
     
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
+        CardKeyword.Retain,
         CardKeyword.Exhaust
     ];
 

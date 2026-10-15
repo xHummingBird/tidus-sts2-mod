@@ -23,7 +23,11 @@ public class ClutchShot() : TidusCard(
     TargetType.AnyEnemy),
     IBlitz
 {
-    protected override bool ShouldGlowGoldInternal => (Owner.Creature.CurrentHp * 2 <= Owner.Creature.MaxHp) || Owner.HasPower<HastePower>();
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+    [
+        CardKeyword.Exhaust
+    ];
+    protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
     
     private const string Increase = "Increase";
 
@@ -89,9 +93,15 @@ public class ClutchShot() : TidusCard(
                 choiceContext,
                 play,
                 play.Target);
-            if (Owner.Creature.CurrentHp * 2 <= Owner.Creature.MaxHp)
-                await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Damage.PreviewValue, ValueProp.Unpowered,
-                    play, false);
+            int increaseAmount =
+                DynamicVars[Increase].IntValue;
+
+            BuffFromBlitz(increaseAmount);
+
+            if (DeckVersion is ClutchShot deckVersion)
+            {
+                deckVersion.BuffFromBlitz(increaseAmount);
+            }
         }
 
         /*

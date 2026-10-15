@@ -19,7 +19,7 @@ public class BlitzAce() : TidusCard(
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CalculationBaseVar(35m),
+        new CalculationBaseVar(30m),
         new ExtraDamageVar(1),
         new CalculatedDamageVar(ValueProp.Move)
             .WithMultiplier((card, _) =>
@@ -144,7 +144,7 @@ public class BlitzAce() : TidusCard(
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(10m);
+        DynamicVars.CalculationBase.UpgradeValueBy(9m);
         DynamicVars["HpThreshold"].UpgradeValueBy(-1);
     }
 }

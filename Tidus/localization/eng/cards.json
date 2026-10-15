@@ -82,7 +82,7 @@
   "TIDUS-DASH_ATTACK.description": "Deal {Damage:diff()} damage and apply 1 [gold]Delay[/gold] to ALL enemies.\nIf this is the first card you play this turn, gain {HastePower:diff} [gold]Haste[/gold].",
   "TIDUS-DASH_ATTACK.title": "Dash Attack",
 
-  "TIDUS-CLUTCH_SHOT.description": "Deal {Damage:diff()} damage.\nIf you have 50% HP or less, gain [gold]Block[/gold] equal to damage dealt. \n{BlitzIcon}: Permanently increase this card's damage by {Increase:diff()}.",
+  "TIDUS-CLUTCH_SHOT.description": "Deal {Damage:diff()} damage. \nPermanently increase this card's damage by {Increase:diff()}. \n{BlitzIcon}: Permanently increase this card's damage by {Increase:diff()}.",
   "TIDUS-CLUTCH_SHOT.title": "Clutch Shot",
 
   "TIDUS-JUMPING_VOLLEY.description": "Deal {Damage:diff()} damage. \nCosts 1 less {energyPrefix:energyIcons(1)} for each Skill played this turn. \n{BlitzIcon}: The next Attack you play costs 0 {energyPrefix:energyIcons(1)}.",
@@ -175,7 +175,7 @@
   "TIDUS-GOLDEN_ARMS.description": "You cannot draw additional cards this turn.\nALL cards in your [gold]Hand[/gold] are free to play this turn.",
   "TIDUS-GOLDEN_ARMS.title": "Golden Arms",
 
-  "TIDUS-VENOM_TACKLE.description": "Enemy deals {VenomTacklePower:diff()} less damage with Attacks this turn.",
+  "TIDUS-VENOM_TACKLE.description": "Enemy loses {VenomTacklePower:diff()} [gold]Strength[/gold] this turn.",
   "TIDUS-VENOM_TACKLE.title": "Venom Tackle",
 
   "TIDUS-TACTICIAN.description": "Gain {Overdrive:diff()} [red]Overdrive[/red].\nNext turn, gain {Energy:energyIcons()} and gain {HastePower:diff()} [gold]Haste[/gold].",

@@ -25,8 +25,8 @@ public class Swordplay() : TidusCard(
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(10m, ValueProp.Move),
-        new DynamicVar("Overdrive", 20m)
+        new DamageVar(12m, ValueProp.Move),
+        new DynamicVar("Overdrive", 15m)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -124,6 +124,6 @@ public class Swordplay() : TidusCard(
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(4m);
-        DynamicVars["Overdrive"].UpgradeValueBy(10m);
+        DynamicVars["Overdrive"].UpgradeValueBy(8m);
     }
 }

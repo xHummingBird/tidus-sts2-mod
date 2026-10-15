@@ -15,6 +15,11 @@ public class SpeedBlock() : TidusCard(1, CardType.Skill,
 {
     protected override bool ShouldGlowGoldInternal => Owner.HasPower<HastePower>();
     
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [
+            HoverTipFactory.FromPower<HastePower>()
+        ];
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(8, ValueProp.Move)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

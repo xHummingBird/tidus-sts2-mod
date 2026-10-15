@@ -26,13 +26,13 @@ public class JechtShotTwo() : TidusCard(
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new CalculationBaseVar(25m),
-        new ExtraDamageVar(2),
-        new CalculatedDamageVar(ValueProp.Move)
-            .WithMultiplier((card, _) =>
-            {
-                return card.Owner.PlayerCombatState.AllCards
-                    .Count(c => c.Keywords.Contains(TidusEnums.Blitz));
-            })
+        new ExtraDamageVar(2m),
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) =>
+            CombatManager.Instance.History.CardPlaysFinished.Count(
+                entry =>
+                    entry.CardPlay.Card.Owner == card.Owner &&
+                    entry.CardPlay.Card.Keywords.Contains(TidusEnums.Blitz)
+            ))
     ];
     
     public override IEnumerable<CardKeyword> CanonicalKeywords =>

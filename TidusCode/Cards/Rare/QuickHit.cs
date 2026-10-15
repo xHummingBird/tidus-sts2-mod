@@ -26,7 +26,7 @@ public class QuickHit() : TidusCard(
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(10m, ValueProp.Move),
+        new DamageVar(12m, ValueProp.Move),
         new EnergyVar(1)
     ];
     
@@ -69,6 +69,5 @@ public class QuickHit() : TidusCard(
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(5m);
-        AddKeyword(CardKeyword.Innate);
     }
 }

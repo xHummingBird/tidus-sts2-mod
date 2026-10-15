@@ -38,14 +38,9 @@ public class Initiative() : TidusCard(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PlayerCmd.GainEnergy(
-            DynamicVars.Energy.IntValue, Owner);
-        
-        await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].IntValue, Owner.Creature, this);
-
-        OverdriveManager.GainOverdrive(
-            Owner,
-            DynamicVars["Overdrive"].IntValue);
+        await PlayerCmd.GainEnergy(1, Owner);
+        await PowerCmd.Apply<HastePower>(choiceContext, Owner.Creature, DynamicVars["HastePower"].BaseValue, Owner.Creature, this);
+        OverdriveManager.GainOverdrive(Owner, DynamicVars["Overdrive"].IntValue);
     }
 
     protected override void OnUpgrade()

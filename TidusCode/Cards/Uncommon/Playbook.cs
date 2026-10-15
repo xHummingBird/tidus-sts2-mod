@@ -13,7 +13,7 @@ namespace Tidus.TidusCode.Cards.Uncommon;
 
 public class Playbook() : TidusCard(
     1,
-    CardType.Power,
+    CardType.Skill,
     CardRarity.Uncommon,
     TargetType.Self)
 {

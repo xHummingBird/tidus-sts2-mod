@@ -24,7 +24,7 @@ public class SpiralCut() : TidusCard(2, CardType.Attack,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<OverdriveReadyPower>()
+        HoverTipFactory.FromPower<HastePower>()
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
